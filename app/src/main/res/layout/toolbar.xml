@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_top"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:theme="@style/LoginTheme" >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_dashboard_logo"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/toolbar_title" />
+
+        <ImageButton
+            android:id="@+id/menu_profile"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:padding="@dimen/padding5"
+            android:background="@color/colorPrimary"
+            android:layout_gravity="center_vertical|end"
+            android:src="@drawable/ic_outline_perm_identity_24px"
+            android:layout_marginEnd="@dimen/padding"
+            android:layout_marginRight="@dimen/padding" />
+
+
+    </android.support.v7.widget.Toolbar>
+
+</LinearLayout>

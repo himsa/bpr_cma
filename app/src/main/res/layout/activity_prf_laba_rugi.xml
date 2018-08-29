@@ -1,0 +1,1335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".form.PrfLabaRugiActivity">
+    <include
+        layout="@layout/new_toolbar"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/grey_bg"
+            android:orientation="vertical"
+            android:padding="@dimen/padding">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding5"
+                android:text="@string/txt_omz"
+                android:textSize="@dimen/sub_title" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding10" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="@dimen/padding5"
+                    android:text=" "
+                    android:textColor="@color/grey_bg"
+                    android:textSize="@dimen/sub_sub_title" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_corner_grey"
+                        android:focusable="false"
+                        android:padding="@dimen/padding5"
+                        android:text="Rp"
+                        android:textSize="@dimen/sub_title" />
+
+                    <EditText
+                        android:id="@+id/et_omz"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_corner_white"
+                        android:ems="10"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:padding="@dimen/padding5"
+                        android:textSize="@dimen/sub_title" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding5" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/full_rounded_corner_white"
+                android:padding="@dimen/padding5">
+
+                <EditText
+                    android:id="@+id/et_detail_keterangan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:hint="@string/txt_keterangan"
+                    android:inputType="textMultiLine"
+                    android:padding="@dimen/padding5" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding5" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="@dimen/padding5"
+                    android:text="@string/txt_hpp"
+                    android:textSize="@dimen/sub_title" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/et_hpp"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/right_rounded_corner_white"
+                        android:ems="3"
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:padding="@dimen/padding5"
+                        android:textSize="@dimen/sub_title" />
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/right_rounded_corner_grey"
+                        android:focusable="false"
+                        android:padding="@dimen/padding5"
+                        android:text="%"
+                        android:textSize="@dimen/sub_title" />
+                </LinearLayout>
+            </LinearLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding5" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/grey_bg"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding5"
+                    android:text="@string/txt_biaya_usaha"
+                    android:textSize="@dimen/sub_title" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/padding5"
+                        android:text="@string/txt_gaji_kyw"
+                        android:textSize="@dimen/sub_sub_title" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_grey"
+                            android:focusable="false"
+                            android:padding="@dimen/padding5"
+                            android:text="Rp"
+                            android:textSize="@dimen/sub_title" />
+
+                        <EditText
+                            android:id="@+id/et_gaji_kyw"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_white"
+                            android:ems="10"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:padding="@dimen/padding5"
+                            android:textSize="@dimen/sub_title" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/padding5"
+                        android:text="@string/txt_sw_tmp_usaha"
+                        android:textSize="@dimen/sub_sub_title" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_grey"
+                            android:focusable="false"
+                            android:padding="@dimen/padding5"
+                            android:text="Rp"
+                            android:textSize="@dimen/sub_title" />
+
+                        <EditText
+                            android:id="@+id/et_sw_tmp_usaha"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_white"
+                            android:ems="10"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:padding="@dimen/padding5"
+                            android:textSize="@dimen/sub_title" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/padding5"
+                        android:text="@string/txt_lstrik_air_tel"
+                        android:textSize="@dimen/sub_sub_title" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_grey"
+                            android:focusable="false"
+                            android:padding="@dimen/padding5"
+                            android:text="Rp"
+                            android:textSize="@dimen/sub_title" />
+
+                        <EditText
+                            android:id="@+id/et_lstrik_air_tel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_white"
+                            android:ems="10"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:padding="@dimen/padding5"
+                            android:textSize="@dimen/sub_title" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/padding5"
+                        android:text="@string/txt_adm_keamanan_ling"
+                        android:textSize="@dimen/sub_sub_title" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_grey"
+                            android:focusable="false"
+                            android:padding="@dimen/padding5"
+                            android:text="Rp"
+                            android:textSize="@dimen/sub_title" />
+
+                        <EditText
+                            android:id="@+id/et_adm_keamanan_ling"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_white"
+                            android:ems="10"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:padding="@dimen/padding5"
+                            android:textSize="@dimen/sub_title" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/padding5"
+                        android:text="@string/txt_lain_lain"
+                        android:textSize="@dimen/sub_sub_title" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_grey"
+                            android:focusable="false"
+                            android:padding="@dimen/padding5"
+                            android:text="Rp"
+                            android:textSize="@dimen/sub_title" />
+
+                        <EditText
+                            android:id="@+id/et_lain_lain"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_white"
+                            android:ems="10"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:padding="@dimen/padding5"
+                            android:textSize="@dimen/sub_title" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/padding5"
+                        android:text="@string/txt_jml_biaya_usaha"
+                        android:textSize="@dimen/sub_sub_title" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_grey"
+                            android:focusable="false"
+                            android:padding="@dimen/padding5"
+                            android:text="Rp"
+                            android:textSize="@dimen/sub_title" />
+
+                        <EditText
+                            android:id="@+id/et_jml_biaya_usaha"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_white"
+                            android:ems="10"
+                            android:focusable="false"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:padding="@dimen/padding5"
+                            android:textSize="@dimen/sub_title"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@drawable/full_rounded_corner_white"
+                    android:padding="@dimen/padding5">
+
+                    <EditText
+                        android:id="@+id/et_detail_keterangan2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/txt_keterangan"
+                        android:inputType="textMultiLine"
+                        android:padding="@dimen/padding5" />
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding5"
+                    android:text="@string/txt_keuntungan_usaha"
+                    android:textSize="@dimen/sub_title" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding10" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/padding5"
+                        android:text=" "
+                        android:textColor="@color/grey_bg"
+                        android:textSize="@dimen/sub_sub_title" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_grey"
+                            android:focusable="false"
+                            android:padding="@dimen/padding5"
+                            android:text="Rp"
+                            android:textSize="@dimen/sub_title" />
+
+                        <EditText
+                            android:id="@+id/et_keuntungan_usaha"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_white"
+                            android:ems="10"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:padding="@dimen/padding5"
+                            android:textSize="@dimen/sub_title" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/padding5"
+                        android:text="@string/txt_grs_prft_mrgn"
+                        android:textSize="@dimen/sub_sub_title" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/et_grs_prft_mrgn"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/right_rounded_corner_white"
+                            android:ems="3"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:padding="@dimen/padding5"
+                            android:textSize="@dimen/sub_title" />
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/right_rounded_corner_grey"
+                            android:focusable="false"
+                            android:padding="@dimen/padding5"
+                            android:text="%"
+                            android:textSize="@dimen/sub_title" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/grey_bg"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/padding5"
+                        android:text="@string/txt_pndpt_tmbhn"
+                        android:textSize="@dimen/sub_title" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/padding5" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="@dimen/padding5"
+                            android:text="@string/txt_pndptn_suami_istri"
+                            android:textSize="@dimen/sub_sub_title" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rounded_corner_grey"
+                                android:focusable="false"
+                                android:padding="@dimen/padding5"
+                                android:text="Rp"
+                                android:textSize="@dimen/sub_title" />
+
+                            <EditText
+                                android:id="@+id/et_pndptn_suami_istri"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rounded_corner_white"
+                                android:ems="10"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:maxLines="1"
+                                android:padding="@dimen/padding5"
+                                android:textSize="@dimen/sub_title" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/padding5" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="@dimen/padding5"
+                            android:text="@string/txt_pndptn_lain"
+                            android:textSize="@dimen/sub_sub_title" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rounded_corner_grey"
+                                android:focusable="false"
+                                android:padding="@dimen/padding5"
+                                android:text="Rp"
+                                android:textSize="@dimen/sub_title" />
+
+                            <EditText
+                                android:id="@+id/et_pndptn_lain"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rounded_corner_white"
+                                android:ems="10"
+                                android:imeOptions="actionNext"
+                                android:inputType="number"
+                                android:maxLines="1"
+                                android:padding="@dimen/padding5"
+                                android:textSize="@dimen/sub_title" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@drawable/full_rounded_corner_white"
+                    android:padding="@dimen/padding5">
+
+                    <EditText
+                        android:id="@+id/et_detail_keterangan3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/txt_keterangan"
+                        android:inputType="textMultiLine"
+                        android:padding="@dimen/padding5" />
+                </LinearLayout>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding5"
+                    android:text="@string/txt_netto"
+                    android:textSize="@dimen/sub_title" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding10" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/padding5"
+                        android:text=" "
+                        android:textColor="@color/grey_bg"
+                        android:textSize="@dimen/sub_sub_title" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_grey"
+                            android:focusable="false"
+                            android:padding="@dimen/padding5"
+                            android:text="Rp"
+                            android:textSize="@dimen/sub_title" />
+
+                        <EditText
+                            android:id="@+id/et_netto"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_white"
+                            android:ems="10"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:padding="@dimen/padding5"
+                            android:textSize="@dimen/sub_title" />
+                    </LinearLayout>
+                </LinearLayout>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@drawable/full_rounded_corner_white"
+                    android:padding="@dimen/padding5">
+
+                    <EditText
+                        android:id="@+id/et_detail_keterangan4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/txt_keterangan"
+                        android:inputType="textMultiLine"
+                        android:padding="@dimen/padding5" />
+                </LinearLayout>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding5"
+                    android:text="@string/txt_keuangan_pribd"
+                    android:textSize="@dimen/sub_title" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/padding5"
+                        android:text="@string/txt_biaya_rt"
+                        android:textSize="@dimen/sub_sub_title" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_grey"
+                            android:focusable="false"
+                            android:padding="@dimen/padding5"
+                            android:text="Rp"
+                            android:textSize="@dimen/sub_title" />
+
+                        <EditText
+                            android:id="@+id/et_biaya_rt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_white"
+                            android:ems="10"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:padding="@dimen/padding5"
+                            android:textSize="@dimen/sub_title" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/padding5"
+                        android:text="@string/txt_lstrik_air_tel"
+                        android:textSize="@dimen/sub_sub_title" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_grey"
+                            android:focusable="false"
+                            android:padding="@dimen/padding5"
+                            android:text="Rp"
+                            android:textSize="@dimen/sub_title" />
+
+                        <EditText
+                            android:id="@+id/et_lstrik_air_tel2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_white"
+                            android:ems="10"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:padding="@dimen/padding5"
+                            android:textSize="@dimen/sub_title" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/padding5"
+                        android:text="@string/txt_b_pendidikan"
+                        android:textSize="@dimen/sub_sub_title" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_grey"
+                            android:focusable="false"
+                            android:padding="@dimen/padding5"
+                            android:text="Rp"
+                            android:textSize="@dimen/sub_title" />
+
+                        <EditText
+                            android:id="@+id/et_b_pendidikan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_white"
+                            android:ems="10"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:padding="@dimen/padding5"
+                            android:textSize="@dimen/sub_title" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/padding5"
+                        android:text="@string/txt_b_sewa_lainnya"
+                        android:textSize="@dimen/sub_sub_title" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_grey"
+                            android:focusable="false"
+                            android:padding="@dimen/padding5"
+                            android:text="Rp"
+                            android:textSize="@dimen/sub_title" />
+
+                        <EditText
+                            android:id="@+id/et_b_sewa_lainnya"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_white"
+                            android:ems="10"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:padding="@dimen/padding5"
+                            android:textSize="@dimen/sub_title" />
+                    </LinearLayout>
+                </LinearLayout>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/padding5"
+                        android:text="@string/txt_ttl_b_pribd"
+                        android:textSize="@dimen/sub_sub_title" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_grey"
+                            android:focusable="false"
+                            android:padding="@dimen/padding5"
+                            android:text="Rp"
+                            android:textSize="@dimen/sub_title" />
+
+                        <EditText
+                            android:id="@+id/et_ttl_b_pribd"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_white"
+                            android:ems="10"
+                            android:focusable="false"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:padding="@dimen/padding5"
+                            android:textSize="@dimen/sub_title" />
+                    </LinearLayout>
+                </LinearLayout>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@drawable/full_rounded_corner_white"
+                    android:padding="@dimen/padding5">
+
+                    <EditText
+                        android:id="@+id/et_detail_keterangan6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/txt_keterangan"
+                        android:inputType="textMultiLine"
+                        android:padding="@dimen/padding5" />
+                </LinearLayout>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding5"
+                    android:text="@string/txt_sisa_pnghsln_net"
+                    android:textSize="@dimen/sub_title" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding10" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/padding5"
+                        android:text=" "
+                        android:textColor="@color/grey_bg"
+                        android:textSize="@dimen/sub_sub_title" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_grey"
+                            android:focusable="false"
+                            android:padding="@dimen/padding5"
+                            android:text="Rp"
+                            android:textSize="@dimen/sub_title" />
+
+                        <EditText
+                            android:id="@+id/et_sisa_pnghsln_net"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_white"
+                            android:ems="10"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:padding="@dimen/padding5"
+                            android:textSize="@dimen/sub_title" />
+                    </LinearLayout>
+                </LinearLayout>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@drawable/full_rounded_corner_white"
+                    android:padding="@dimen/padding5">
+
+                    <EditText
+                        android:id="@+id/et_detail_keterangan7"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/txt_keterangan"
+                        android:inputType="textMultiLine"
+                        android:padding="@dimen/padding5" />
+                </LinearLayout>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding5"
+                    android:text="@string/txt_angs_bnk_lain"
+                    android:textSize="@dimen/sub_title" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding10" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/padding5"
+                        android:text=" "
+                        android:textColor="@color/grey_bg"
+                        android:textSize="@dimen/sub_sub_title" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_grey"
+                            android:focusable="false"
+                            android:padding="@dimen/padding5"
+                            android:text="Rp"
+                            android:textSize="@dimen/sub_title" />
+
+                        <EditText
+                            android:id="@+id/et_angs_bnk_lain"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_white"
+                            android:ems="10"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:padding="@dimen/padding5"
+                            android:textSize="@dimen/sub_title" />
+                    </LinearLayout>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding5"
+                    android:text="@string/txt_trmsk_angs_cma"
+                    android:textSize="@dimen/text" />
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding5"
+                    android:text="@string/txt_rnc_angs"
+                    android:textSize="@dimen/sub_title" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding10" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/padding5"
+                        android:text=" "
+                        android:textColor="@color/grey_bg"
+                        android:textSize="@dimen/sub_sub_title" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_grey"
+                            android:focusable="false"
+                            android:padding="@dimen/padding5"
+                            android:text="Rp"
+                            android:textSize="@dimen/sub_title" />
+
+                        <EditText
+                            android:id="@+id/et_rnc_angs"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_white"
+                            android:ems="10"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:padding="@dimen/padding5"
+                            android:textSize="@dimen/sub_title" />
+                    </LinearLayout>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding5"
+                    android:text="@string/txt_ssuai_prm_kredit"
+                    android:textSize="@dimen/text" />
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding5"
+                    android:text="@string/txt_total_angs"
+                    android:textSize="@dimen/sub_title" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding10" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/padding5"
+                        android:text=" "
+                        android:textColor="@color/grey_bg"
+                        android:textSize="@dimen/sub_sub_title" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_grey"
+                            android:focusable="false"
+                            android:padding="@dimen/padding5"
+                            android:text="Rp"
+                            android:textSize="@dimen/sub_title" />
+
+                        <EditText
+                            android:id="@+id/et_total_angs"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rounded_corner_white"
+                            android:ems="10"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:padding="@dimen/padding5"
+                            android:textSize="@dimen/sub_title" />
+                    </LinearLayout>
+                </LinearLayout>
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:background="@drawable/full_rounded_corner_white"
+                    android:padding="@dimen/padding5">
+
+                    <EditText
+                        android:id="@+id/et_detail_keterangan8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/txt_keterangan"
+                        android:inputType="textMultiLine"
+                        android:padding="@dimen/padding5" />
+                </LinearLayout>
+            </LinearLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding20" />
+            <android.support.design.button.MaterialButton
+                android:id="@+id/btn_next_prf_laba_rugi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                app:backgroundTint="@color/colorPrimary"
+                android:textColor="@color/white"
+                android:text="@string/txt_next"/>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

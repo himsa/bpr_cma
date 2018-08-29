@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_top_nasabah"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/colorPrimary" >
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:src="@drawable/ic_round_arrow_back_ios_24px_white"
+            android:padding="@dimen/padding5"
+            android:layout_gravity="start"
+            android:id="@+id/back_nasabah" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding5"
+            android:textColor="@color/white"
+            android:textSize="@dimen/title"
+            android:text="@string/informasi_nasabah"/>
+    </android.support.v7.widget.Toolbar>
+</LinearLayout>

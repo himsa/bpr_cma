@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "929247569213",
+    "firebase_url": "https://bpr-cma-bf5cc.firebaseio.com",
+    "project_id": "bpr-cma-bf5cc",
+    "storage_bucket": "bpr-cma-bf5cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:929247569213:android:2329c4195c87767f",
+        "android_client_info": {
+          "package_name": "com.layanacomputindo.bprcma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "929247569213-nfvt98ppl3tbvm5knr61sv1jr6pgr4nj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.layanacomputindo.bprcma",
+            "certificate_hash": "efa2aecbf0d9c532a2d31084c532f40726a354da"
+          }
+        },
+        {
+          "client_id": "929247569213-kh2901i7tops06ahiam24nmtj6ah8kr5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSkONpbXdIgqMt5957-Tn5_TjBS0mpZYE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "929247569213-kh2901i7tops06ahiam24nmtj6ah8kr5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

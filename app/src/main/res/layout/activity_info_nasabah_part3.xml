@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_bg"
+    tools:context=".form.InfoNasabahPart3Activity">
+    <include
+        layout="@layout/new_toolbar"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/grey_bg"
+            android:padding="@dimen/padding"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_foto_status_tmp_tinggl"
+                android:padding="@dimen/padding5"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sub_title"/>
+            <android.support.design.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/white">
+                <com.isapanah.awesomespinner.AwesomeSpinner
+                    android:id="@+id/sp_status"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    app:spinnerHint="@string/status"/>
+            </android.support.design.card.MaterialCardView>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding5" />
+            <ImageView
+                android:id="@+id/img_st_tmp_tgl"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:src="@drawable/images_none"
+                android:scaleType="centerCrop"/>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding5" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_foto_tmp_tinggl_dbtr"
+                android:padding="@dimen/padding5"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sub_title"/>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding5" />
+            <ImageView
+                android:id="@+id/img_tmp_tgl_1"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:src="@drawable/images_none"
+                android:scaleType="centerCrop"/>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding10" />
+            <ImageView
+                android:id="@+id/img_tmp_tgl_2"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:src="@drawable/images_none"
+                android:scaleType="centerCrop"/>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding10" />
+            <android.support.design.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </android.support.design.card.MaterialCardView>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding5" />
+
+            <android.support.design.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:cardElevation="@dimen/padding3"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/padding5">
+
+                    <TextView
+                        android:id="@+id/tv_location"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:padding="@dimen/padding10"
+                        android:text="@string/txt_tndai"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sub_title" />
+
+                    <ImageView
+                        android:id="@+id/pick_location"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_icon_lokasi" />
+                </LinearLayout>
+            </android.support.design.card.MaterialCardView>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding10" />
+            <android.support.design.button.MaterialButton
+                android:id="@+id/btn_next_inf_nas_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="@string/txt_next"/>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

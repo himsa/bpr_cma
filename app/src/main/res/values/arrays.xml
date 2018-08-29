@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="filter">
+        <item>Disetujui</item>
+        <item>Draft</item>
+        <item>Cancel</item>
+    </array>
+
+    <array name="sortBy">
+        <item>Nama</item>
+        <item>Status</item>
+        <item>Tanggal</item>
+        <item>Kota</item>
+    </array>
+
+    <array name="status">
+        <item>Milik sendiri</item>
+        <item>Milik orang tua</item>
+        <item>Sewa</item>
+        <item>Lain - lain</item>
+    </array>
+
+    <array name="tjKredit">
+        <item>Modal kerja</item>
+        <item>Pembelian kendaraan</item>
+        <item>Investasi</item>
+        <item>Lainnya</item>
+    </array>
+
+    <array name="sktEkonomi">
+        <item>Pertanian</item>
+        <item>Industri</item>
+        <item>Perdagangan</item>
+        <item>Jasa</item>
+        <item>Lainnya</item>
+    </array>
+
+    <array name="smbrPngmbln">
+        <item>Hasil bulanan</item>
+        <item>Hasil penyelesaian proyek</item>
+        <item>Lain - lain</item>
+    </array>
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_daftar_customer"
+        android:title="@string/action_daftar_customer"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@drawable/ic_round_favorite_24px">
+    </item>
+    <item
+        android:id="@+id/action_pengajuan_kredit"
+        android:title="@string/action_pengajuan_kredit"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@drawable/ic_round_save_24px">
+    </item>
+    <item
+        android:id="@+id/action_informasi_kredit"
+        android:title="@string/action_informasi_kredit"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@drawable/ic_round_assessment_24px">
+    </item>
+</menu>
