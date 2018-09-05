@@ -82,11 +82,10 @@ class AnalisisUsahaPart1Activity : AppCompatActivity(), RadioGroup.OnCheckedChan
     override fun onClick(p0: View) {
         when(p0.id){
             R.id.btn_next_an_usaha1 -> {
-//                pDialog = ProgressDialog.show(this,
-//                        "",
-//                        "Tunggu Sebentar!")
-//                submitData()
-                startActivity(Intent(this@AnalisisUsahaPart1Activity, AnalisisUsahaPart2Activity::class.java))
+                pDialog = ProgressDialog.show(this,
+                        "",
+                        "Tunggu Sebentar!")
+                submitData()
             }
             R.id.tv_spesifikasi_usaha -> {
                 selectDob()

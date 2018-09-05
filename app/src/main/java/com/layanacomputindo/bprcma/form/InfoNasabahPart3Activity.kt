@@ -125,11 +125,10 @@ class InfoNasabahPart3Activity : AppCompatActivity(), View.OnClickListener {
                 onBackPressed()
             }
             R.id.btn_next_inf_nas_3 -> {
-//                pDialog = ProgressDialog.show(this,
-//                        "",
-//                        "Tunggu Sebentar!")
-//                submitData()
-                startActivity(Intent(this@InfoNasabahPart3Activity, InfoUsahaPkrjnPart1Activity::class.java))
+                pDialog = ProgressDialog.show(this,
+                        "",
+                        "Tunggu Sebentar!")
+                submitData()
             }
             R.id.img_st_tmp_tgl -> {
                 flagPhoto = 0

@@ -9,6 +9,7 @@ import android.util.Log
 import android.widget.Toast
 import com.google.gson.GsonBuilder
 import com.layanacomputindo.bprcma.BuildConfig
+import com.layanacomputindo.bprcma.form.Kesimpulan
 import com.layanacomputindo.bprcma.model.*
 import com.layanacomputindo.bprcma.util.Config
 import okhttp3.Interceptor
@@ -671,6 +672,9 @@ class RestClient {
         @GET("api/kredit/jaminan_kendaraan/{kredit_id}")
         fun getListJaminanKendaraan(@Path("kredit_id") kredit_id: Int): Call<Results<Kendaraan>>
 
+        @GET("api/kredit/jaminan_kendaraan/{kredit_id}")
+        fun getDetailJaminanKendaraan(@Path("kredit_id") kredit_id: Int): Call<Results<Kendaraan>>
+
         @GET("api/kredit/jaminan_tabungan_deposito/{kredit_id}")
         fun getListJaminanTabungan(@Path("kredit_id") kredit_id: Int): Call<Results<Tabungan>>
 
@@ -697,16 +701,26 @@ class RestClient {
         fun getFotoPekerjaan(@Path("debitur_id") debiturId: Int): Call<Results<FotoPekerjaan>>
 
         @GET("api/kredit/detail/{kredit_id}")
-        fun getPermohonanKredit(@Path("debitur_id") debiturId: Int): Call<Results<Kredit>>
+        fun getPermohonanKredit(@Path("kredit_id") kredit_id: Int): Call<Results<Kredit>>
 
         @GET("api/kredit/usaha/{kredit_id}")
-        fun getUsahaKredit(@Path("debitur_id") debiturId: Int): Call<Results<UsahaKredit>>
+        fun getUsahaKredit(@Path("kredit_id") kredit_id: Int): Call<Results<UsahaKredit>>
 
         @GET("api/kredit/usaha/pasangan/{kredit_id}")
-        fun getUsahaKreditPasangan(@Path("debitur_id") debiturId: Int): Call<Results<UsahaKreditPasangan>>
+        fun getUsahaKreditPasangan(@Path("kredit_id") kredit_id: Int): Call<Results<UsahaKreditPasangan>>
 
-        //SUMBER PENGEMBALIAN KREDIT API NYA BLM ADA COEG
+        //SUMBER PENGEMBALIAN KREDIT API NYA BLM ADA
 
+        @GET("api/kredit/keuangan/{kredit_id}")
+        fun getKeuangan(@Path("kredit_id") kredit_id: Int): Call<Results<Keuangan>>
 
+        @GET("api/kredit/keuangan/performa/{kredit_id}")
+        fun getPerforma(@Path("kredit_id") kredit_id: Int): Call<Results<Performa>>
+
+        @GET("api/kredit/kesimpulan/{kredit_id}")
+        fun getKesimpulan(@Path("kredit_id") kredit_id: Int): Call<Results<Kesimpulan>>
+
+        @GET("api/kredit/kesimpulan/{kredit_id}")
+        fun getFotoDokumenLain(@Path("kredit_id") kredit_id: Int): Call<Results<Kesimpulan>>
     }
 }

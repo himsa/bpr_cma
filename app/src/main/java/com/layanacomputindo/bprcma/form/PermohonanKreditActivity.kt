@@ -105,11 +105,10 @@ class PermohonanKreditActivity : AppCompatActivity(), RadioGroup.OnCheckedChange
     override fun onClick(p0: View) {
         when(p0.id){
             R.id.btn_next_prm_kredit -> {
-//                pDialog = ProgressDialog.show(this,
-//                        "",
-//                        "Tunggu Sebentar!")
-//                submitData()
-                startActivity(Intent(this@PermohonanKreditActivity, AnalisisUsahaPart1Activity::class.java))
+                pDialog = ProgressDialog.show(this,
+                        "",
+                        "Tunggu Sebentar!")
+                submitData()
             }
         }
     }

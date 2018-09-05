@@ -226,11 +226,10 @@ class PrfLabaRugiActivity : AppCompatActivity(), View.OnClickListener, View.OnFo
     override fun onClick(p0: View) {
         when(p0.id){
             R.id.btn_next_prf_laba_rugi -> {
-//                pDialog = ProgressDialog.show(this,
-//                        "",
-//                        "Tunggu Sebentar!")
-//                submitData()
-                startActivity(Intent(this@PrfLabaRugiActivity, AnalisisRatioActivity::class.java))
+                pDialog = ProgressDialog.show(this,
+                        "",
+                        "Tunggu Sebentar!")
+                submitData()
             }
         }
     }
@@ -281,7 +280,7 @@ class PrfLabaRugiActivity : AppCompatActivity(), View.OnClickListener, View.OnFo
                     val result = response.body()
                     if (result != null) {
                         if (result.getStatus()!!) {
-                            startActivity(Intent(this@PrfLabaRugiActivity, AnalisisRatioActivity::class.java))
+                            startActivity(Intent(this@PrfLabaRugiActivity, KesimpulanActivity::class.java))
                         } else {
                             Log.e("debitur", response.raw().toString())
                             Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()

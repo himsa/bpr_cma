@@ -119,11 +119,10 @@ class InfoUsahaPkrjnPart1Activity : AppCompatActivity(), View.OnClickListener, R
     override fun onClick(p0: View) {
         when(p0.id){
             R.id.btn_next_inf_ush_pkrj_1 -> {
-//                pDialog = ProgressDialog.show(this,
-//                        "",
-//                        "Tunggu Sebentar!")
-//                submitData()
-                startActivity(Intent(this@InfoUsahaPkrjnPart1Activity, PermohonanKreditActivity::class.java))
+                pDialog = ProgressDialog.show(this,
+                        "",
+                        "Tunggu Sebentar!")
+                submitData()
             }
             R.id.img_tempat -> {
                 flagPhoto = 0

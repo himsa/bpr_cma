@@ -49,11 +49,10 @@ class KesimpulanActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(p0: View) {
         when(p0.id){
             R.id.btn_next_kesimpulan -> {
-//                pDialog = ProgressDialog.show(this,
-//                        "",
-//                        "Tunggu Sebentar!")
-//                submitData()
-                startActivity(Intent(this@KesimpulanActivity, UsulanKreditActivity::class.java))
+                pDialog = ProgressDialog.show(this,
+                        "",
+                        "Tunggu Sebentar!")
+                submitData()
             }
         }
     }

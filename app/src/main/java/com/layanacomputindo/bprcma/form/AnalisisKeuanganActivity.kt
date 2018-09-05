@@ -211,11 +211,10 @@ class AnalisisKeuanganActivity : AppCompatActivity(), View.OnClickListener, View
     override fun onClick(p0: View) {
         when(p0.id){
             R.id.btn_next_an_keuangan1 -> {
-//                pDialog = ProgressDialog.show(this,
-//                        "",
-//                        "Tunggu Sebentar!")
-//                submitData()
-                startActivity(Intent(this@AnalisisKeuanganActivity, AnalisisKeuangan2Activity::class.java))
+                pDialog = ProgressDialog.show(this,
+                        "",
+                        "Tunggu Sebentar!")
+                submitData()
             }
         }
     }

@@ -196,11 +196,10 @@ class AnalisisKeuangan2Activity : AppCompatActivity(), View.OnClickListener, Vie
     override fun onClick(p0: View) {
         when(p0.id){
             R.id.btn_next_an_keuangan2 -> {
-//                pDialog = ProgressDialog.show(this,
-//                        "",
-//                        "Tunggu Sebentar!")
-//                submitData()
-                startActivity(Intent(this@AnalisisKeuangan2Activity, PrfLabaRugiActivity::class.java))
+                pDialog = ProgressDialog.show(this,
+                        "",
+                        "Tunggu Sebentar!")
+                submitData()
             }
         }
     }
