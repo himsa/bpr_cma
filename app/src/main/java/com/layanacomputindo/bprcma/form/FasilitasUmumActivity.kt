@@ -75,11 +75,14 @@ class FasilitasUmumActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(p0: View) {
         when(p0.id){
             R.id.btn_next_fasilitas_umum -> {
-//                pDialog = ProgressDialog.show(this,
-//                        "",
-//                        "Tunggu Sebentar!")
-//                submitData()
-                startActivity(Intent(applicationContext, FotoKondisiTanahActivity::class.java))
+                if(sharedPreferences.getString(Config.ROLE, "")== "komite"||sharedPreferences.getString(Config.ROLE, "")== "supervisor"){
+                    startActivity(Intent(applicationContext, FotoKondisiTanahActivity::class.java))
+                }else{
+                    pDialog = ProgressDialog.show(this,
+                            "",
+                            "Tunggu Sebentar!")
+                    submitData()
+                }
             }
             R.id.img_denah -> {
                 selectImage()

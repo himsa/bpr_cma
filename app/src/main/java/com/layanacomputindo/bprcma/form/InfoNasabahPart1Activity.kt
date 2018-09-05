@@ -23,10 +23,12 @@ import android.support.v4.content.ContextCompat
 import android.util.Base64
 import android.util.Log
 import android.widget.Toast
+import com.layanacomputindo.bprcma.model.Debitur
 import com.layanacomputindo.bprcma.model.Result
 import com.layanacomputindo.bprcma.model.UserId
 import com.layanacomputindo.bprcma.rest.RestClient
 import com.layanacomputindo.bprcma.util.Config
+import com.squareup.picasso.Picasso
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import retrofit2.Call
 import retrofit2.Callback
@@ -63,9 +65,12 @@ class InfoNasabahPart1Activity : AppCompatActivity(), View.OnClickListener, Date
 
         setPermission()
         setPreferences()
-
         if(sharedPreferences.getString("from", "") == "repeat"){
-            setDummy()
+            pDialog = ProgressDialog.show(this,
+                    "",
+                    "Tunggu Sebentar!")
+            add_telp.visibility = View.GONE
+            getData()
         }
 
         et_alamat.setImeOptions(EditorInfo.IME_ACTION_DONE)
@@ -77,6 +82,55 @@ class InfoNasabahPart1Activity : AppCompatActivity(), View.OnClickListener, Date
         img_foto_diri.setOnClickListener(this)
         tv_dob.setOnClickListener(this)
         add_telp.setOnClickListener (this)
+    }
+
+    private fun getData() {
+        val service by lazy {
+            RestClient.getClient(this)
+        }
+        val call = service.getDebitur(idDebitur)
+        call.enqueue(object : Callback<Result<Debitur>>{
+            override fun onFailure(call: Call<Result<Debitur>>?, t: Throwable?) {
+                pDialog!!.dismiss()
+                Log.e("on Failure", t.toString())
+                Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<Result<Debitur>>, response: Response<Result<Debitur>>) {
+                Log.d("debitur", "Status Code = " + response.code())
+                if(response.isSuccessful){
+                    val result = response.body()
+                    if (result != null) {
+                        if (result.getStatus()!!) {
+                            val data = result.getData()
+                            pDialog!!.dismiss()
+                            if (data != null){
+                                et_nama.setText(data.getNama())
+                                et_tmp_lhr.setText(data.getTempatLahir())
+                                tv_dob.text = data.getTanggalLahir()
+                                et_no_ktp.setText(data.getNoKtp())
+                                et_telp_1.setText(data.getTeleponDebitur()!![0].getNoTelepon())
+                                et_alamat.setText(data.getAlamat())
+                                Picasso.with(this@InfoNasabahPart1Activity)
+                                        .load(data.getFotoDebitur()?.getFotoKtp())
+                                        .error(android.R.drawable.stat_notify_error).into(img_ktp)
+                                Picasso.with(this@InfoNasabahPart1Activity)
+                                        .load(data.getFotoDebitur()?.getFotoKartuKeluarga())
+                                        .error(android.R.drawable.stat_notify_error).into(img_kk)
+                                Picasso.with(this@InfoNasabahPart1Activity)
+                                        .load(data.getFotoDebitur()?.getFotoDenganKtp())
+                                        .error(android.R.drawable.stat_notify_error).into(img_foto_diri)
+                            }
+
+                        } else {
+                            Log.e("debitur", response.raw().toString())
+                            Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+
+        })
     }
 
     private fun setDummy() {
@@ -108,11 +162,10 @@ class InfoNasabahPart1Activity : AppCompatActivity(), View.OnClickListener, Date
     override fun onClick(p0: View) {
         when(p0.id){
             R.id.btn_next_inf_nas_1 -> {
-//                pDialog = ProgressDialog.show(this,
-//                        "",
-//                        "Tunggu Sebentar!")
-//                submitNewDebitur()
-                startActivity(Intent(applicationContext, InfoNasabahPart2Activity::class.java))
+                pDialog = ProgressDialog.show(this,
+                        "",
+                        "Tunggu Sebentar!")
+                submitNewDebitur()
             }
             R.id.img_kk -> {
                 selectImage(REQUEST_IMAGE_KK_CAPTURE)
@@ -141,7 +194,7 @@ class InfoNasabahPart1Activity : AppCompatActivity(), View.OnClickListener, Date
         val service by lazy {
             RestClient.getClient(this)
         }
-        val call = service.sendNewDebitur(idDebitur, et_nama.text.toString(), et_tmp_lhr.text.toString(),
+        val call = service.updateNewDebitur(idDebitur, et_nama.text.toString(), et_tmp_lhr.text.toString(),
                 tv_dob.text.toString(), et_no_ktp.text.toString(), et_alamat.text.toString())
         call.enqueue(object : Callback<Result<UserId>>{
             override fun onResponse(call: Call<Result<UserId>>, response: Response<Result<UserId>>) {

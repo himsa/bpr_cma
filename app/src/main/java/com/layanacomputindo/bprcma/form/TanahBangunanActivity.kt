@@ -71,11 +71,14 @@ class TanahBangunanActivity : AppCompatActivity(), View.OnClickListener, RadioGr
     override fun onClick(p0: View) {
         when(p0.id){
             R.id.btn_next_tanah_bangunan -> {
-//                pDialog = ProgressDialog.show(this,
-//                        "",
-//                        "Tunggu Sebentar!")
-//                submitData()
-                startActivity(Intent(applicationContext, KeadaanTanahActivity::class.java))
+                if(sharedPreferences.getString(Config.ROLE, "")== "komite"||sharedPreferences.getString(Config.ROLE, "")== "supervisor"){
+                    startActivity(Intent(applicationContext, KeadaanTanahActivity::class.java))
+                }else{
+                    pDialog = ProgressDialog.show(this,
+                            "",
+                            "Tunggu Sebentar!")
+                    submitData()
+                }
             }
         }
     }

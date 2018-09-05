@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.card.MaterialCardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/AppTheme"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="@dimen/padding5"
+    app:cardUseCompatPadding="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding10">
+        <LinearLayout
+            android:id="@+id/ll_nama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding5"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/nama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Himsa"
+                android:textSize="@dimen/title"
+                android:textColor="@android:color/black"/>
+            <TextView
+                android:id="@+id/alamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pogung lor"
+                android:textSize="@dimen/text"
+                android:textColor="@android:color/darker_gray"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Marketing : "
+                    android:textAlignment="center"
+                    android:textSize="@dimen/sub_title"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/marketing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sub_title"
+                    android:textColor="@android:color/darker_gray"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </LinearLayout>
+        <android.support.design.button.MaterialButton
+            android:id="@+id/btn_detail"
+            android:layout_below="@+id/ll_nama"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_detail" />
+    </RelativeLayout>
+</android.support.design.card.MaterialCardView>

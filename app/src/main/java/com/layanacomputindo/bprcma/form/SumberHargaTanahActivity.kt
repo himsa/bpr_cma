@@ -58,11 +58,14 @@ class SumberHargaTanahActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(p0: View) {
         when(p0.id){
             R.id.btn_next_sbr_hrg_tnh -> {
-//                pDialog = ProgressDialog.show(this,
-//                        "",
-//                        "Tunggu Sebentar!")
-//                submitData()
-                startActivity(Intent(applicationContext, PenilaianKesimpulanActivity::class.java))
+                if(sharedPreferences.getString(Config.ROLE, "")== "komite"||sharedPreferences.getString(Config.ROLE, "")== "supervisor"){
+                    startActivity(Intent(applicationContext, PenilaianKesimpulanActivity::class.java))
+                }else{
+                    pDialog = ProgressDialog.show(this,
+                            "",
+                            "Tunggu Sebentar!")
+                    submitData()
+                }
             }
         }
     }

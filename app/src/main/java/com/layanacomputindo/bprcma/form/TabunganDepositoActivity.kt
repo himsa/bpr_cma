@@ -16,6 +16,7 @@ import android.view.View
 import android.widget.Toast
 import com.layanacomputindo.bprcma.MenuActivity
 import com.layanacomputindo.bprcma.R
+import com.layanacomputindo.bprcma.SpalshActivity
 import com.layanacomputindo.bprcma.model.Result
 import com.layanacomputindo.bprcma.model.UserId
 import com.layanacomputindo.bprcma.rest.RestClient
@@ -33,6 +34,7 @@ class TabunganDepositoActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var sharedPreferences: SharedPreferences
     var idKredit = 0
     var strImageTabungan = ""
+    var flag = 0
     private var pDialog: ProgressDialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +53,10 @@ class TabunganDepositoActivity : AppCompatActivity(), View.OnClickListener {
 
         et_nominal_rekening.addTextChangedListener(RupiahTextWatcher(et_nominal_rekening))
 
+        btn_tambah_jaminan.setOnClickListener(this)
         btn_selesai_tabungan.setOnClickListener(this)
+        btn_setuju.setOnClickListener(this)
+        btn_tolak.setOnClickListener(this)
         img_tabungan.setOnClickListener(this)
     }
 
@@ -65,18 +70,71 @@ class TabunganDepositoActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(p0: View) {
         when(p0.id){
+            R.id.btn_tambah_jaminan -> {
+                flag = 0
+            }
             R.id.btn_selesai_tabungan -> {
-//                pDialog = ProgressDialog.show(this,
-//                        "",
-//                        "Tunggu Sebentar!")
-//                submitData()
+                flag = 1
+                pDialog = ProgressDialog.show(this,
+                        "",
+                        "Tunggu Sebentar!")
+                submitData()
                 startActivity(Intent(this@TabunganDepositoActivity, MenuActivity::class.java))
                 finishAffinity()
             }
             R.id.img_tabungan -> {
                 selectImage()
             }
+            R.id.btn_setuju -> {
+                pDialog = ProgressDialog.show(this,
+                        "",
+                        "Tunggu Sebentar!")
+                aproval("disetujui")
+            }
+            R.id.btn_tolak -> {
+                pDialog = ProgressDialog.show(this,
+                        "",
+                        "Tunggu Sebentar!")
+                aproval("ditolak")
+            }
         }
+    }
+
+    private fun aproval(s: String) {
+        val service by lazy {
+            RestClient.getClient(this)
+        }
+        val call = service.setKreditAproval(idKredit, s)
+        call.enqueue(object: Callback<Result<UserId>>{
+            override fun onFailure(call: Call<Result<UserId>>?, t: Throwable?) {
+                pDialog!!.dismiss()
+                Log.e("on Failure", t.toString())
+                Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<Result<UserId>>, response: Response<Result<UserId>>) {
+                Log.d("aproval", "Status Code = " + response.code())
+                if(response.isSuccessful){
+                    pDialog!!.dismiss()
+                    val result = response.body()
+                    if (result != null) {
+                        if (result.getStatus()!!) {
+                            Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
+                            if(flag==0){
+                                startActivity(Intent(this@TabunganDepositoActivity, PemeriksaanJaminanActivity::class.java))
+                            }else{
+                                startActivity(Intent(this@TabunganDepositoActivity, SpalshActivity::class.java))
+                                finishAffinity()
+                            }
+                        } else {
+                            Log.e("aproval", response.raw().toString())
+                            Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+
+        })
     }
 
     private fun submitData() {
@@ -149,6 +207,15 @@ class TabunganDepositoActivity : AppCompatActivity(), View.OnClickListener {
         sharedPreferences = getSharedPreferences(Config.PREF_NAME,
                 Activity.MODE_PRIVATE)
         idKredit = sharedPreferences.getInt(Config.KREDIT_ID, Config.EMPTY_INT)
+        if(sharedPreferences.getString(Config.ROLE, "")== "komite"||sharedPreferences.getString(Config.ROLE, "")== "supervisor"){
+            btn_selesai_tabungan.visibility = View.GONE
+            btn_tambah_jaminan.visibility = View.GONE
+            ll_aproval.visibility = View.VISIBLE
+        }else{
+            btn_selesai_tabungan.visibility = View.VISIBLE
+            btn_tambah_jaminan.visibility = View.VISIBLE
+            ll_aproval.visibility = View.GONE
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -100,7 +100,6 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/padding5" />
-
             <android.support.design.card.MaterialCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

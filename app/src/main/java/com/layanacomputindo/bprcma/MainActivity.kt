@@ -75,12 +75,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                             editor.putBoolean(Config.IS_LOGIN, true)
                             editor.apply()
                             if (data.role == "komite"||data.role == "supervisor"){
-                                val edit = sharedPreferences.edit()
-                                edit.putString("status", "cancel")
-                                edit.apply()
-                                startActivity(Intent(this@MainActivity, InformasiKreditActivity::class.java))
+                                startActivity(Intent(this@MainActivity, AprovalListActivity::class.java))
+                                finish()
                             }else{
                                 startActivity(Intent(this@MainActivity, MenuActivity::class.java))
+                                finish()
                             }
                             Log.d("Login", "Token: " + data.token)
                             Log.d("Login", "saveToken: " + sharedPreferences.getString(Config.USER_TOKEN, Config.EMPTY))

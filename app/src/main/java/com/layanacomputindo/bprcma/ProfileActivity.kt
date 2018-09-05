@@ -13,7 +13,9 @@ import android.view.WindowManager
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import com.google.gson.Gson
 import com.layanacomputindo.bprcma.model.Result
+import com.layanacomputindo.bprcma.model.Token
 import com.layanacomputindo.bprcma.model.User
 import com.layanacomputindo.bprcma.rest.RestClient
 import com.layanacomputindo.bprcma.util.Config
@@ -91,17 +93,43 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
                 onBackPressed()
             }
             R.id.txt_log_out -> {
-                val editor = sharedPreferences!!.edit()
-                editor.putBoolean(Config.IS_LOGIN, false)
-                editor.apply()
-                val i = Intent(this,SpalshActivity::class.java)
-                startActivity(i)
-                finishAffinity()
+                logOut()
             }
             R.id.txt_about -> {
                 val i = Intent(this,AboutActivity::class.java)
                 startActivity(i)
             }
         }
+    }
+
+    private fun logOut() {
+        val service by lazy {
+            RestClient.getClient(this)
+        }
+        val call = service.updateFCM("")
+
+        call.enqueue(object : Callback<Result<Token>> {
+            override fun onResponse(call: Call<Result<Token>>, response: Response<Result<Token>>) {
+                Log.d("FCM", "Status Code = " + response.code())
+                if (response.isSuccessful()) {
+                    val result = response.body()
+                    Log.e("FCM", "response = " + Gson().toJson(result))
+                    val editor = sharedPreferences!!.edit()
+                    editor.putBoolean(Config.IS_LOGIN, false)
+                    editor.apply()
+                    val i = Intent(this@ProfileActivity,SpalshActivity::class.java)
+                    startActivity(i)
+                    finishAffinity()
+
+                } else {
+                    Log.e("FCM", response.raw().toString())
+                }
+            }
+
+            override fun onFailure(call: Call<Result<Token>>, t: Throwable) {
+                Log.e("on Failure", t.toString())
+                Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_LONG).show()
+            }
+        })
     }
 }

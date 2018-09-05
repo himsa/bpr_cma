@@ -100,11 +100,14 @@ class KendaraanActivity : AppCompatActivity(), RadioGroup.OnCheckedChangeListene
     override fun onClick(p0: View) {
         when(p0.id){
             R.id.btn_next_kendaraan -> {
-//                pDialog = ProgressDialog.show(this,
-//                        "",
-//                        "Tunggu Sebentar!")
-//                submitData()
-                startActivity(Intent(applicationContext, FotoKondisiKendaraanActivity::class.java))
+                if(sharedPreferences.getString(Config.ROLE, "")== "komite"||sharedPreferences.getString(Config.ROLE, "")== "supervisor"){
+                    startActivity(Intent(applicationContext, FotoKondisiKendaraanActivity::class.java))
+                }else{
+                    pDialog = ProgressDialog.show(this,
+                            "",
+                            "Tunggu Sebentar!")
+                    submitData()
+                }
             }
             R.id.et_tgl_pmriksaan -> {
                 selectDob()

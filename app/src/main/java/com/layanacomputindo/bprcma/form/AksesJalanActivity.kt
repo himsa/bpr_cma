@@ -48,11 +48,14 @@ class AksesJalanActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(p0: View) {
         when(p0.id){
             R.id.btn_next_aks_jln -> {
-//                pDialog = ProgressDialog.show(this,
-//                        "",
-//                        "Tunggu Sebentar!")
-//                submitData()
-                startActivity(Intent(applicationContext, KeadaanBangunanActivity::class.java))
+                if(sharedPreferences.getString(Config.ROLE, "")== "komite"||sharedPreferences.getString(Config.ROLE, "")== "supervisor"){
+                    startActivity(Intent(applicationContext, KeadaanBangunanActivity::class.java))
+                }else{
+                    pDialog = ProgressDialog.show(this,
+                            "",
+                            "Tunggu Sebentar!")
+                    submitData()
+                }
             }
         }
     }

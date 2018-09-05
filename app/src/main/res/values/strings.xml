@@ -392,7 +392,9 @@
     <string name="txt_pngn_kendaraan">Penggunaan Jaminan</string>
     <string name="txt_bkti_gsk">Bukti Gesek</string>
     <string name="action_list_kredit">Daftar Kredit</string>
+    <string name="action_list_jaminan">Daftar Jaminan</string>
     <string name="txt_add">TAMBAH KREDIT</string>
+    <string name="txt_add_j">TAMBAH JAMINAN</string>
     <string name="txt_date">Tanggal Kredit</string>
     <string name="txt_foto_diri">Foto Diri</string>
     <string name="txt_lht_dftr_kredit">LIHAT DAFTAR KREDIT</string>
@@ -401,4 +403,9 @@
     <string name="txt_detail1">Detail</string>
     <string name="txt_sktr">Tampak Sekitar 1</string>
     <string name="txt_sktr2">Tampak Sekitar 2</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="txt_tolak">TOLAK</string>
+    <string name="txt_setuju">SETUJU</string>
 </resources>

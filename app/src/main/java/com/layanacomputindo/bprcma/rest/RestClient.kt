@@ -138,9 +138,12 @@ class RestClient {
         @POST("api/debitur")
         fun getNewUser(@Field("user_id") userId: Int): Call<Result<UserId>>
 
+        @POST("api/debitur/new")
+        fun sendNewDebitur(): Call<Result<UserId>>
+
         @FormUrlEncoded
         @POST("api/debitur/{debitur_id}")
-        fun sendNewDebitur(@Path("debitur_id") debiturId: Int,
+        fun updateNewDebitur(@Path("debitur_id") debiturId: Int,
                            @Field("nama") nama: String,
                            @Field("tempat_lahir") tempat_lahir: String,
                            @Field("tanggal_lahir") tanggal_lahir: String,
@@ -633,14 +636,77 @@ class RestClient {
         //info kredit
         @FormUrlEncoded
         @POST("api/debitur/find/by_status")
-        fun getInfoKreditByStatus(@Field("status") status: String): Call<Result<CurrentPage>>
+        fun getInfoKreditByStatus(@Field("status") status: String): Call<Result<CurrentPage<Debitur>>>
 
         //user
         @GET("api/user")
         fun getUser(): Call<Result<User>>
 
+        //user
+        @GET("api/debitur/detail/{debitur_id}")
+        fun getDebiturDetail(@Path("debitur_id") debiturId: Int): Call<Result<Debitur>>
+
+        //Notif
+        @FormUrlEncoded
+        @POST("api/user/update/fcm")
+        fun updateFCM(@Field("fcm_token") fcm_token: String): Call<Result<Token>>
+
         //KreditByDebitur
         @GET("api/debitur/kredit/{debitur_id}")
         fun getKreditByDebitur(@Path("debitur_id") debiturId: Int): Call<Results<Kredit>>
+
+        @GET("api/debitur/list_kredit/approval")
+        fun getKreditAproval(): Call<Result<CurrentPage<Aproval>>>
+
+        //Aproval
+        @FormUrlEncoded
+        @POST("api/kredit/approve/{kredit_id}")
+        fun setKreditAproval(@Path("kredit_id") kredit_id: Int,
+                             @Field("status_kredit") status_kredit: String): Call<Result<UserId>>
+
+        //Jaminan
+        @GET("api/kredit/jaminan_tanah_bangunan/{kredit_id}")
+        fun getListJaminanTanah(@Path("kredit_id") kredit_id: Int): Call<Results<TanahBangunan>>
+
+        @GET("api/kredit/jaminan_kendaraan/{kredit_id}")
+        fun getListJaminanKendaraan(@Path("kredit_id") kredit_id: Int): Call<Results<Kendaraan>>
+
+        @GET("api/kredit/jaminan_tabungan_deposito/{kredit_id}")
+        fun getListJaminanTabungan(@Path("kredit_id") kredit_id: Int): Call<Results<Tabungan>>
+
+        //Get Form
+        @GET("api/debitur/detail/{debitur_id}")
+        fun getDebitur(@Path("debitur_id") debiturId: Int): Call<Result<Debitur>>
+
+        @GET("api/debitur/pasangan/{debitur_id}")
+        fun getPasangan(@Path("debitur_id") debiturId: Int): Call<Result<Pasangan>>
+
+        @GET("api/debitur/pasangan/foto/{debitur_id}")
+        fun getFotoPasangan(@Path("debitur_id") debiturId: Int): Call<Result<FotoPasangan>>
+
+        @GET("api/debitur/tempat_tinggal/{debitur_id}")
+        fun getTempatTinggal(@Path("debitur_id") debiturId: Int): Call<Result<TempatTinggal>>
+
+        @GET("api/debitur/tempat_tinggal/foto/{debitur_id}")
+        fun getFotoTempatTinggal(@Path("debitur_id") debiturId: Int): Call<Results<FotoTempatTinggal>>
+
+        @GET("api/debitur/pekerjaan/{debitur_id}")
+        fun getPekerjaan(@Path("debitur_id") debiturId: Int): Call<Result<Pekerjaan>>
+
+        @GET("api/debitur/pekerjaan/foto/{debitur_id}")
+        fun getFotoPekerjaan(@Path("debitur_id") debiturId: Int): Call<Results<FotoPekerjaan>>
+
+        @GET("api/kredit/detail/{kredit_id}")
+        fun getPermohonanKredit(@Path("debitur_id") debiturId: Int): Call<Results<Kredit>>
+
+        @GET("api/kredit/usaha/{kredit_id}")
+        fun getUsahaKredit(@Path("debitur_id") debiturId: Int): Call<Results<UsahaKredit>>
+
+        @GET("api/kredit/usaha/pasangan/{kredit_id}")
+        fun getUsahaKreditPasangan(@Path("debitur_id") debiturId: Int): Call<Results<UsahaKreditPasangan>>
+
+        //SUMBER PENGEMBALIAN KREDIT API NYA BLM ADA COEG
+
+
     }
 }

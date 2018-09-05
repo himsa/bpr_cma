@@ -268,6 +268,15 @@
             </LinearLayout>
             <Space
                 android:layout_width="match_parent"
+                android:layout_height="@dimen/padding" />
+            <android.support.design.button.MaterialButton
+                android:id="@+id/btn_tambah_jaminan"
+                app:backgroundTint="@color/colorAccent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/txt_add_j"/>
+            <Space
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/padding20" />
             <android.support.design.button.MaterialButton
                 android:id="@+id/btn_selesai_kendaraan"
@@ -277,6 +286,32 @@
                 app:backgroundTint="@color/colorPrimary"
                 android:textColor="@color/white"
                 android:text="@string/txt_selesai"/>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/ll_aproval">
+                <android.support.design.button.MaterialButton
+                    android:id="@+id/btn_tolak"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txt_tolak"/>
+                <Space
+                    android:layout_width="@dimen/padding"
+                    android:layout_height="match_parent" />
+                <android.support.design.button.MaterialButton
+                    android:id="@+id/btn_setuju"
+                    android:layout_weight="1"
+                    app:backgroundTint="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/txt_setuju"
+                    android:layout_gravity="end"/>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

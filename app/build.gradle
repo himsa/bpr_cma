@@ -18,11 +18,11 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField 'String', 'BASE_URL_API', '"http://dev.layana.id/"'
+            buildConfigField 'String', 'BASE_URL_API', '"http://178.128.29.244/"'
         }
         release {
             minifyEnabled false
-            buildConfigField 'String', 'BASE_URL_API', '"http://dev.layana.id/"'
+            buildConfigField 'String', 'BASE_URL_API', '"http://178.128.29.244/"'
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

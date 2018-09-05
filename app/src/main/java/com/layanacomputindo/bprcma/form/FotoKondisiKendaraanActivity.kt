@@ -16,6 +16,7 @@ import android.view.View
 import android.widget.Toast
 import com.layanacomputindo.bprcma.MenuActivity
 import com.layanacomputindo.bprcma.R
+import com.layanacomputindo.bprcma.SpalshActivity
 import com.layanacomputindo.bprcma.model.Result
 import com.layanacomputindo.bprcma.model.UserId
 import com.layanacomputindo.bprcma.rest.RestClient
@@ -33,6 +34,8 @@ class FotoKondisiKendaraanActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var sharedPreferences: SharedPreferences
     var idJaminan = 0
+    var idKredit = 0
+    var flag = 0
     var strImage1 = ""
     var strImage2 = ""
     var strImage3 = ""
@@ -59,7 +62,10 @@ class FotoKondisiKendaraanActivity : AppCompatActivity(), View.OnClickListener {
             setDummy()
         }
 
+        btn_tambah_jaminan.setOnClickListener(this)
         btn_selesai_kendaraan.setOnClickListener(this)
+        btn_setuju.setOnClickListener(this)
+        btn_tolak.setOnClickListener(this)
         img_tmp_muka.setOnClickListener(this)
         img_tmp_belakang.setOnClickListener(this)
         img_tmp_kanan.setOnClickListener(this)
@@ -85,17 +91,45 @@ class FotoKondisiKendaraanActivity : AppCompatActivity(), View.OnClickListener {
         sharedPreferences = getSharedPreferences(Config.PREF_NAME,
                 Activity.MODE_PRIVATE)
         idJaminan = sharedPreferences.getInt(Config.JAMINAN_ID, Config.EMPTY_INT)
+        idKredit = sharedPreferences.getInt(Config.KREDIT_ID, Config.EMPTY_INT)
+        if(sharedPreferences.getString(Config.ROLE, "")== "komite"||sharedPreferences.getString(Config.ROLE, "")== "supervisor"){
+            btn_selesai_kendaraan.visibility = View.GONE
+            btn_tambah_jaminan.visibility = View.GONE
+            ll_aproval.visibility = View.VISIBLE
+        }else{
+            btn_selesai_kendaraan.visibility = View.VISIBLE
+            btn_tambah_jaminan.visibility = View.VISIBLE
+            ll_aproval.visibility = View.GONE
+        }
     }
 
     override fun onClick(p0: View) {
         when(p0.id){
+            R.id.btn_tambah_jaminan -> {
+                flag = 0
+                pDialog = ProgressDialog.show(this,
+                        "",
+                        "Tunggu Sebentar!")
+                submitData()
+            }
             R.id.btn_selesai_kendaraan -> {
-//                pDialog = ProgressDialog.show(this,
-//                        "",
-//                        "Tunggu Sebentar!")
-//                submitData()
-                startActivity(Intent(applicationContext, MenuActivity::class.java))
-                finishAffinity()
+                flag = 1
+                pDialog = ProgressDialog.show(this,
+                        "",
+                        "Tunggu Sebentar!")
+                submitData()
+            }
+            R.id.btn_setuju -> {
+                pDialog = ProgressDialog.show(this,
+                        "",
+                        "Tunggu Sebentar!")
+                aproval("disetujui")
+            }
+            R.id.btn_tolak -> {
+                pDialog = ProgressDialog.show(this,
+                        "",
+                        "Tunggu Sebentar!")
+                aproval("ditolak")
             }
             R.id.img_tmp_muka -> {
                 flagPhoto = 0
@@ -130,6 +164,43 @@ class FotoKondisiKendaraanActivity : AppCompatActivity(), View.OnClickListener {
                 selectImage()
             }
         }
+    }
+
+    private fun aproval(s: String) {
+        val service by lazy {
+            RestClient.getClient(this)
+        }
+        val call = service.setKreditAproval(idKredit, s)
+        call.enqueue(object: Callback<Result<UserId>>{
+            override fun onFailure(call: Call<Result<UserId>>?, t: Throwable?) {
+                pDialog!!.dismiss()
+                Log.e("on Failure", t.toString())
+                Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<Result<UserId>>, response: Response<Result<UserId>>) {
+                Log.d("aproval", "Status Code = " + response.code())
+                if(response.isSuccessful){
+                    pDialog!!.dismiss()
+                    val result = response.body()
+                    if (result != null) {
+                        if (result.getStatus()!!) {
+                            Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
+                            if(flag==0){
+                                startActivity(Intent(this@FotoKondisiKendaraanActivity, PemeriksaanJaminanActivity::class.java))
+                            }else{
+                                startActivity(Intent(this@FotoKondisiKendaraanActivity, SpalshActivity::class.java))
+                                finishAffinity()
+                            }
+                        } else {
+                            Log.e("aproval", response.raw().toString())
+                            Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+
+        })
     }
 
     private fun submitData() {

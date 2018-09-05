@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AprovalListActivity">
+
+    <include
+        layout="@layout/toolbar"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/padding5"
+        android:paddingBottom="@dimen/padding5"
+        android:paddingLeft="@dimen/padding10"
+        android:paddingStart="@dimen/padding10"
+        android:paddingEnd="@dimen/padding10"
+        android:paddingRight="@dimen/padding10"
+        android:background="@color/grey_bg"
+        android:layout_below="@+id/toolbar">
+        <!--<Space-->
+        <!--android:id="@+id/spacer_informasi"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/padding3"-->
+        <!--android:layout_below="@id/spinner"/>-->
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/srlRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_customer_aproval"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/grey_bg"/>
+        </android.support.v4.widget.SwipeRefreshLayout>
+        <ProgressBar
+            android:id="@+id/pbLoading"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="30dp"
+            android:visibility="gone"/>
+    </RelativeLayout>
+    <!--<android.support.design.widget.BottomNavigationView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"-->
+    <!--app:menu="@menu/bottom_navigation_menu"/>-->
+
+</RelativeLayout>

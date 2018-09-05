@@ -108,11 +108,14 @@ class FotoKondisiTanahActivity : AppCompatActivity(), View.OnClickListener {
                 selectImage()
             }
             R.id.btn_next_foto_tanah -> {
-//                pDialog = ProgressDialog.show(this,
-//                        "",
-//                        "Tunggu Sebentar!")
-//                submitData()
-                startActivity(Intent(applicationContext, FaktorPenilaianActivity::class.java))
+                if(sharedPreferences.getString(Config.ROLE, "")== "komite"||sharedPreferences.getString(Config.ROLE, "")== "supervisor"){
+                    startActivity(Intent(applicationContext, FaktorPenilaianActivity::class.java))
+                }else{
+                    pDialog = ProgressDialog.show(this,
+                            "",
+                            "Tunggu Sebentar!")
+                    submitData()
+                }
             }
         }
     }

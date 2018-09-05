@@ -13,7 +13,10 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import com.layanacomputindo.bprcma.InformasiKreditActivity
+import com.layanacomputindo.bprcma.ListJaminanActivity
 import com.layanacomputindo.bprcma.R
+import com.layanacomputindo.bprcma.form.InfoNasabahPart1Activity
 import com.layanacomputindo.bprcma.model.Kredit
 import com.layanacomputindo.bprcma.util.Config
 import com.squareup.picasso.Picasso
@@ -70,7 +73,20 @@ class KreditListAdapter(private var mList: ArrayList<Kredit>, val context: Conte
             holder.tvNominal.text = "Rp" + format.format(mList[position].getNominal()) + ",00"
 
             holder.btnDetail.setOnClickListener{
-
+                sharedPreferences = context.getSharedPreferences(Config.PREF_NAME,
+                        Activity.MODE_PRIVATE)
+                val editor = sharedPreferences.edit()
+                mList[position].getId()?.let { it1 -> editor.putInt(Config.KREDIT_ID, it1) }
+                editor.apply()
+                context.startActivity(Intent(context, InfoNasabahPart1Activity::class.java))
+            }
+            holder.btnJaminan.setOnClickListener{
+                sharedPreferences = context.getSharedPreferences(Config.PREF_NAME,
+                        Activity.MODE_PRIVATE)
+                val editor = sharedPreferences.edit()
+                mList[position].getId()?.let { it1 -> editor.putInt(Config.KREDIT_ID, it1) }
+                editor.apply()
+                context.startActivity(Intent(context, ListJaminanActivity::class.java))
             }
         }else{
             (holder as ProgressViewHolder).pbLoading.isIndeterminate = true

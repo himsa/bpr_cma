@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import com.layanacomputindo.bprcma.adapter.KreditListAdapter
@@ -125,5 +126,12 @@ class ListKreditActivity : AppCompatActivity(), View.OnClickListener {
         if(sharedPreferences.getString(Config.ROLE, "") == "komite"||sharedPreferences.getString(Config.ROLE, "") == "supervisor"){
             btn_add_kredit.visibility = View.GONE
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> onBackPressed()
+        }
+        return true
     }
 }

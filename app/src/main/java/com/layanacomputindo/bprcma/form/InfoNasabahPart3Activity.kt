@@ -61,9 +61,6 @@ class InfoNasabahPart3Activity : AppCompatActivity(), View.OnClickListener {
         setPermission()
         setPreferences()
 
-        if(sharedPreferences.getString("from", "") == "repeat"){
-            setDummy()
-        }
 
         // construct a new instance of SimpleLocation
         location = SimpleLocation(this)
@@ -79,6 +76,12 @@ class InfoNasabahPart3Activity : AppCompatActivity(), View.OnClickListener {
         sp_status.setOnSpinnerItemClickListener({ position, itemAtPosition ->
             uploadStatus = itemAtPosition
         })
+        if(sharedPreferences.getString("from", "") == "repeat"){
+//            pDialog = ProgressDialog.show(this,
+//                    "",
+//                    "Tunggu Sebentar!")
+            getData()
+        }
 
         btn_next_inf_nas_3.setOnClickListener(this)
         img_st_tmp_tgl.setOnClickListener(this)
@@ -87,12 +90,17 @@ class InfoNasabahPart3Activity : AppCompatActivity(), View.OnClickListener {
         pick_location.setOnClickListener(this)
     }
 
+    private fun getData() {
+
+    }
+
     private fun setDummy() {
-        sp_status.setSelection(1)
+        sp_status.setSelection(2)
         img_st_tmp_tgl.setImageResource(R.drawable.dummy_pbb)
         img_tmp_tgl_1.setImageResource(R.drawable.dummy_rumah)
         img_tmp_tgl_2.setImageResource(R.drawable.dummy_rumah)
         tv_location.text = resources.getText(R.string.lokasi_disimpan)
+        tv_location.isClickable = false
         pick_location.setImageResource(R.drawable.icon_lokasi_grey)
     }
 
@@ -199,7 +207,7 @@ class InfoNasabahPart3Activity : AppCompatActivity(), View.OnClickListener {
             override fun onFailure(call: Call<Result<UserId>>, t: Throwable?) {
                 pDialog!!.dismiss()
                 Log.e("on Failure", t.toString())
-                Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_SHORT).show()
             }
 
         })

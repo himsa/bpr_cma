@@ -38,14 +38,13 @@ class OpsiPengajuanActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(p0: View) {
         when(p0.id){
             R.id.op_new -> {
-//                pDialog = ProgressDialog.show(this,
-//                        "",
-//                        "Tunggu Sebentar!")
-//                doNewUser()
+                pDialog = ProgressDialog.show(this,
+                        "",
+                        "Tunggu Sebentar!")
+                doNewUser()
                 val editor = sharedPreferences.edit()
-                editor.putString("from", "main")
+                editor.putString("from", "new")
                 editor.apply()
-                startActivity(Intent(applicationContext, InfoNasabahPart1Activity::class.java))
             }
             R.id.op_repeat -> {
                 val intent = Intent(this, InformasiKreditActivity::class.java)
@@ -59,12 +58,11 @@ class OpsiPengajuanActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun doNewUser() {
-        val idUser = sharedPreferences.getInt(Config.USER_ID, Config.EMPTY_INT)
+//        val idUser = sharedPreferences.getInt(Config.USER_ID, Config.EMPTY_INT)
         val service by lazy {
-            RestClient.getClient()
+            RestClient.getClient(this)
         }
-        val call = service!!.getNewUser(idUser)
-        Toast.makeText(applicationContext, call.request().body().toString(), Toast.LENGTH_LONG).show()
+        val call = service.sendNewDebitur()
         call.enqueue(object : Callback<Result<UserId>> {
             override fun onResponse(call: Call<Result<UserId>>, response: Response<Result<UserId>>) {
                 Log.d("userId", "Status Code = " + response.code())

@@ -44,17 +44,21 @@ class InformasiKreditActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_informasi_kredit)
         setSupportActionBar(toolbar as Toolbar?)
+        sharedPreferences = getSharedPreferences(Config.PREF_NAME,
+                Activity.MODE_PRIVATE)
         supportActionBar?.run {
-            title = getString(R.string.action_informasi_kredit)
-            setDisplayHomeAsUpEnabled(true)
+            if(sharedPreferences.getString(Config.ROLE, "")== "komite"||sharedPreferences.getString(Config.ROLE, "")== "supervisor"){
+                title = getString(R.string.action_informasi_kredit)
+                setDisplayHomeAsUpEnabled(false)
+            }else{
+                title = getString(R.string.action_informasi_kredit)
+                setDisplayHomeAsUpEnabled(true)
+            }
         }
 
         pDialog = ProgressDialog.show(this,
                 "",
                 "Tunggu Sebentar!")
-
-        sharedPreferences = getSharedPreferences(Config.PREF_NAME,
-                Activity.MODE_PRIVATE)
 
         spFilter = sp_filter
         spSortBy = sp_sort_by
@@ -143,14 +147,14 @@ class InformasiKreditActivity : AppCompatActivity(), View.OnClickListener {
             RestClient.getClient(this)
         }
         val call = service.getInfoKreditByStatus(status)
-        call.enqueue(object : Callback<Result<CurrentPage>>{
-            override fun onFailure(call: Call<Result<CurrentPage>>?, t: Throwable?) {
+        call.enqueue(object : Callback<Result<CurrentPage<Debitur>>>{
+            override fun onFailure(call: Call<Result<CurrentPage<Debitur>>>?, t: Throwable?) {
                 pDialog!!.dismiss()
                 Log.e("on Failure", t.toString())
                 Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_LONG).show()
             }
 
-            override fun onResponse(call: Call<Result<CurrentPage>>, response: Response<Result<CurrentPage>>) {
+            override fun onResponse(call: Call<Result<CurrentPage<Debitur>>>, response: Response<Result<CurrentPage<Debitur>>>) {
                 Log.d("debitur", "Status Code = " + response.code())
                 if(response.isSuccessful){
                     pDialog!!.dismiss()
@@ -159,7 +163,7 @@ class InformasiKreditActivity : AppCompatActivity(), View.OnClickListener {
                         if (result.getStatus()!!) {
                             val page = result.getData()
                             if(page != null){
-                                customerArrayList = page.getData()!!
+                                customerArrayList = page.getData() as ArrayList<Debitur>
                                 if(true){
                                     rvAdapter = CustomerListAdapter(customerArrayList, this@InformasiKreditActivity)
                                     rvCustomer.adapter = rvAdapter
