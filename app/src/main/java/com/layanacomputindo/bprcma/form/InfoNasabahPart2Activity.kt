@@ -16,6 +16,7 @@ import com.layanacomputindo.bprcma.R
 import kotlinx.android.synthetic.main.activity_info_nasabah_part2.*
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
 import android.widget.Toast
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
@@ -71,6 +72,25 @@ class InfoNasabahPart2Activity : AppCompatActivity(), View.OnClickListener, Date
         img_istri.setOnClickListener(this)
         tv_dob.setOnClickListener(this)
         add_telp.setOnClickListener (this)
+    }
+
+    private fun next() {
+        if(sharedPreferences.getString("from", "") == "repeat"){
+            strImagePasangan = getStringImage((img_istri.getDrawable() as BitmapDrawable).bitmap)
+        }
+
+        pDialog = ProgressDialog.show(this,
+                "",
+                "Tunggu Sebentar!")
+        if(et_nama.text.toString() != "" && et_tmp_lhr.text.toString() != "" &&
+                tv_dob.text.toString() != "" && et_no_ktp.text.toString() != "" &&
+                et_telp_1.text.toString() != "" && et_alamat.text.toString() != "" &&
+                strImagePasangan != ""){
+            submitPasanganDebitur()
+        }else{
+            pDialog!!.dismiss()
+            Toast.makeText(applicationContext, R.string.cekData, Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun getData() {
@@ -164,11 +184,7 @@ class InfoNasabahPart2Activity : AppCompatActivity(), View.OnClickListener, Date
                 startActivity(intent)
             }
             R.id.btn_next_inf_nas_2 -> {
-//                pDialog = ProgressDialog.show(this,
-//                        "",
-//                        "Tunggu Sebentar!")
-//                submitPasanganDebitur()
-                startActivity(Intent(this@InfoNasabahPart2Activity, InfoNasabahPart3Activity::class.java))
+                next()
             }
             R.id.img_istri -> {
                 selectImage(REQUEST_IMAGE_ISTRI_GALERY)

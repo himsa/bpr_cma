@@ -408,4 +408,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="txt_tolak">TOLAK</string>
     <string name="txt_setuju">SETUJU</string>
+    <string name="cekData">Data Harus Lengkap</string>
 </resources>

@@ -8,6 +8,7 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -82,6 +83,27 @@ class InfoNasabahPart1Activity : AppCompatActivity(), View.OnClickListener, Date
         img_foto_diri.setOnClickListener(this)
         tv_dob.setOnClickListener(this)
         add_telp.setOnClickListener (this)
+    }
+
+    private fun next() {
+        if(sharedPreferences.getString("from", "") == "repeat"){
+            strImageKK = getStringImage((img_kk.getDrawable() as BitmapDrawable).bitmap)
+            strImageKTP = getStringImage((img_ktp.getDrawable() as BitmapDrawable).bitmap)
+            strImageFoto = getStringImage((img_foto_diri.getDrawable() as BitmapDrawable).bitmap)
+        }
+
+        pDialog = ProgressDialog.show(this,
+                "",
+                "Tunggu Sebentar!")
+        if(et_nama.text.toString() != "" && et_tmp_lhr.text.toString() != "" &&
+                tv_dob.text.toString() != "" && et_no_ktp.text.toString() != "" &&
+                et_telp_1.text.toString() != "" && et_alamat.text.toString() != "" &&
+                strImageKK != "" && strImageKTP != "" && strImageFoto != ""){
+            submitNewDebitur()
+        }else{
+            pDialog!!.dismiss()
+            Toast.makeText(applicationContext, R.string.cekData, Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun getData() {
@@ -162,10 +184,7 @@ class InfoNasabahPart1Activity : AppCompatActivity(), View.OnClickListener, Date
     override fun onClick(p0: View) {
         when(p0.id){
             R.id.btn_next_inf_nas_1 -> {
-                pDialog = ProgressDialog.show(this,
-                        "",
-                        "Tunggu Sebentar!")
-                submitNewDebitur()
+                next()
             }
             R.id.img_kk -> {
                 selectImage(REQUEST_IMAGE_KK_CAPTURE)

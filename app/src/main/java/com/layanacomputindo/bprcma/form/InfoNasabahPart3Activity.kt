@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.layanacomputindo.bprcma.R
 import com.layanacomputindo.bprcma.model.Result
+import com.layanacomputindo.bprcma.model.Results
 import com.layanacomputindo.bprcma.model.UserId
 import com.layanacomputindo.bprcma.rest.RestClient
 import com.layanacomputindo.bprcma.util.Config
@@ -125,10 +126,7 @@ class InfoNasabahPart3Activity : AppCompatActivity(), View.OnClickListener {
                 onBackPressed()
             }
             R.id.btn_next_inf_nas_3 -> {
-                pDialog = ProgressDialog.show(this,
-                        "",
-                        "Tunggu Sebentar!")
-                submitData()
+                next()
             }
             R.id.img_st_tmp_tgl -> {
                 flagPhoto = 0
@@ -151,6 +149,18 @@ class InfoNasabahPart3Activity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    private fun next() {
+        pDialog = ProgressDialog.show(this,
+                "",
+                "Tunggu Sebentar!")
+        if(uploadStatus != "" && strImage1 != "" && strImage2 != "" && strImage3 !=""){
+            submitData()
+        }else{
+            pDialog!!.dismiss()
+            Toast.makeText(applicationContext, R.string.cekData, Toast.LENGTH_LONG).show()
+        }
+    }
+
     private fun submitData() {
         val service by lazy {
             RestClient.getClient(this)
@@ -163,12 +173,18 @@ class InfoNasabahPart3Activity : AppCompatActivity(), View.OnClickListener {
                     val result = response.body()
                     if (result != null) {
                         if (result.getStatus()!!) {
-                            sendFotoTmpTggl(idDebitur)
+                            pDialog!!.dismiss()
+                            startActivity(Intent(this@InfoNasabahPart3Activity, InfoUsahaPkrjnPart1Activity::class.java))
                         } else {
+                            pDialog!!.dismiss()
                             Log.e("debitur", response.raw().toString())
                             Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
                         }
                     }
+                }else{
+                    pDialog!!.dismiss()
+                    Log.e("debitur", response.raw().toString())
+                    Toast.makeText(baseContext, response.message(), Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -181,29 +197,37 @@ class InfoNasabahPart3Activity : AppCompatActivity(), View.OnClickListener {
         })
     }
 
-    private fun sendFotoTmpTggl(idDebitur: Int) {
+    private fun sendFotoTmpTggl(idDebitur: Int, strImage: String) {
+        pDialog = ProgressDialog.show(this,
+                "",
+                "Tunggu Sebentar!")
         val service by lazy {
             RestClient.getClient(this)
         }
-        val call = service.sendFotoTempatTinggalDebitur(idDebitur, strImage1, strImage2, strImage3)
-        call.enqueue(object : Callback<Result<UserId>>{
-            override fun onResponse(call: Call<Result<UserId>>, response: Response<Result<UserId>>) {
+        val call = service.sendFotoTempatTinggalDebitur(idDebitur, strImage)
+        call.enqueue(object : Callback<Results<UserId>>{
+            override fun onResponse(call: Call<Results<UserId>>, response: Response<Results<UserId>>) {
                 Log.d("tmp tggl", "Status Code = " + response.code())
                 if(response.isSuccessful){
                     val result = response.body()
                     if (result != null) {
                         if (result.getStatus()!!) {
                             pDialog!!.dismiss()
-                            startActivity(Intent(this@InfoNasabahPart3Activity, InfoUsahaPkrjnPart1Activity::class.java))
+
                         } else {
+                            pDialog!!.dismiss()
                             Log.e("debitur", response.raw().toString())
                             Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
                         }
                     }
+                }else{
+                    pDialog!!.dismiss()
+                    Log.e("debitur", response.raw().toString())
+                    Toast.makeText(baseContext, response.message(), Toast.LENGTH_SHORT).show()
                 }
             }
 
-            override fun onFailure(call: Call<Result<UserId>>, t: Throwable?) {
+            override fun onFailure(call: Call<Results<UserId>>, t: Throwable?) {
                 pDialog!!.dismiss()
                 Log.e("on Failure", t.toString())
                 Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_SHORT).show()
@@ -229,12 +253,15 @@ class InfoNasabahPart3Activity : AppCompatActivity(), View.OnClickListener {
             if (flagPhoto == 0){
                 strImage1 = getStringImage(selectedImage)
                 img_st_tmp_tgl.setImageBitmap(selectedImage)
+                sendFotoTmpTggl(idDebitur, strImage1)
             }else if(flagPhoto == 1){
                 strImage2 = getStringImage(selectedImage)
                 img_tmp_tgl_1.setImageBitmap(selectedImage)
+                sendFotoTmpTggl(idDebitur, strImage2)
             }else if(flagPhoto == 2){
                 strImage3 = getStringImage(selectedImage)
                 img_tmp_tgl_2.setImageBitmap(selectedImage)
+                sendFotoTmpTggl(idDebitur, strImage3)
             }
         } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
             val error = CropImage.getActivityResult(data).getError()

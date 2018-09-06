@@ -49,7 +49,7 @@
                     android:padding="@dimen/padding5"
                     android:textSize="@dimen/sub_title"
                     android:background="@drawable/full_rounded_corner_white"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:imeOptions="actionNext"
                     android:maxLines="1"
                     android:ems="10"/>

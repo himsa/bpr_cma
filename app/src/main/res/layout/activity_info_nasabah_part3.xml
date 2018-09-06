@@ -42,16 +42,6 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/padding5" />
-            <ImageView
-                android:id="@+id/img_st_tmp_tgl"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_gravity="center"
-                android:src="@drawable/images_none"
-                android:scaleType="centerCrop"/>
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/padding5" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,6 +49,16 @@
                 android:padding="@dimen/padding5"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sub_title"/>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding5" />
+            <ImageView
+                android:id="@+id/img_st_tmp_tgl"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:src="@drawable/images_none"
+                android:scaleType="centerCrop"/>
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/padding5" />

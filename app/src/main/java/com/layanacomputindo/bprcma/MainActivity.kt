@@ -89,6 +89,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                             Toast.makeText(baseContext, "Username/Password anda salah", Toast.LENGTH_SHORT).show()
                         }
                     }
+                }else{
+                    pDialog!!.dismiss()
+                    Log.e("Login", response.raw().toString())
+                    Toast.makeText(baseContext, "Username/Password anda salah", Toast.LENGTH_SHORT).show()
                 }
             }
 

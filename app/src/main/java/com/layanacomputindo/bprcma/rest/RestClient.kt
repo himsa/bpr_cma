@@ -191,9 +191,7 @@ class RestClient {
         @FormUrlEncoded
         @POST("api/debitur/tempat_tinggal/foto/{debitur_id}")
         fun sendFotoTempatTinggalDebitur(@Path("debitur_id") debiturId: Int,
-                                         @Field("foto_dokumen") fotoDokumen: String,
-                                         @Field("foto_1") foto_1: String,
-                                         @Field("foto_2") foto_2: String): Call<Result<UserId>>
+                                         @Field("foto") foto: String): Call<Results<UserId>>
 
         @FormUrlEncoded
         @POST("api/debitur/pekerjaan/{debitur_id}")
