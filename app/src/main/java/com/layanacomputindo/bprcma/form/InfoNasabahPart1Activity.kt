@@ -74,8 +74,8 @@ class InfoNasabahPart1Activity : AppCompatActivity(), View.OnClickListener, Date
             getData()
         }
 
-        et_alamat.setImeOptions(EditorInfo.IME_ACTION_DONE)
-        et_alamat.setRawInputType(InputType.TYPE_CLASS_TEXT)
+//        et_alamat.setImeOptions(EditorInfo.IME_ACTION_DONE)
+//        et_alamat.setRawInputType(InputType.TYPE_CLASS_TEXT)
 
         btn_next_inf_nas_1.setOnClickListener(this)
         img_kk.setOnClickListener(this)
@@ -87,9 +87,11 @@ class InfoNasabahPart1Activity : AppCompatActivity(), View.OnClickListener, Date
 
     private fun next() {
         if(sharedPreferences.getString("from", "") == "repeat"){
-            strImageKK = getStringImage((img_kk.getDrawable() as BitmapDrawable).bitmap)
-            strImageKTP = getStringImage((img_ktp.getDrawable() as BitmapDrawable).bitmap)
-            strImageFoto = getStringImage((img_foto_diri.getDrawable() as BitmapDrawable).bitmap)
+            if(img_kk.drawable != null && img_ktp.drawable != null && img_foto_diri.drawable != null){
+                strImageKK = getStringImage((img_kk.getDrawable() as BitmapDrawable).bitmap)
+                strImageKTP = getStringImage((img_ktp.getDrawable() as BitmapDrawable).bitmap)
+                strImageFoto = getStringImage((img_foto_diri.getDrawable() as BitmapDrawable).bitmap)
+            }
         }
 
         pDialog = ProgressDialog.show(this,

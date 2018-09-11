@@ -106,7 +106,7 @@
                     android:padding="@dimen/padding5"
                     android:textColor="@color/black"
                     android:background="@color/white"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:imeOptions="actionNext"
                     android:maxLines="1"
                     android:ems="10"/>
@@ -133,11 +133,12 @@
                         android:padding="@dimen/padding5"
                         android:textColor="@color/black"
                         android:background="@color/white"
-                        android:inputType="text"
+                        android:inputType="number"
                         android:imeOptions="actionNext"
                         android:maxLines="1"
                         android:ems="10"/>
                     <ImageButton
+                        android:visibility="gone"
                         android:id="@+id/add_telp"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentEnd="true"
@@ -181,7 +182,7 @@
                 android:textSize="@dimen/sub_title"/>
             <android.support.design.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/white"
                 app:cardUseCompatPadding="true">
                 <EditText

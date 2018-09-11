@@ -64,8 +64,8 @@ class InfoNasabahPart2Activity : AppCompatActivity(), View.OnClickListener, Date
             getData()
         }
 
-        et_alamat.setImeOptions(EditorInfo.IME_ACTION_DONE)
-        et_alamat.setRawInputType(InputType.TYPE_CLASS_TEXT)
+//        et_alamat.setImeOptions(EditorInfo.IME_ACTION_DONE)
+//        et_alamat.setRawInputType(InputType.TYPE_CLASS_TEXT)
 
         btn_next_inf_nas_2.setOnClickListener(this)
         btn_skip_inf_nas_2.setOnClickListener(this)
@@ -76,7 +76,9 @@ class InfoNasabahPart2Activity : AppCompatActivity(), View.OnClickListener, Date
 
     private fun next() {
         if(sharedPreferences.getString("from", "") == "repeat"){
-            strImagePasangan = getStringImage((img_istri.getDrawable() as BitmapDrawable).bitmap)
+            if(strImagePasangan != ""){
+                strImagePasangan = getStringImage((img_istri.getDrawable() as BitmapDrawable).bitmap)
+            }
         }
 
         pDialog = ProgressDialog.show(this,
@@ -246,7 +248,7 @@ class InfoNasabahPart2Activity : AppCompatActivity(), View.OnClickListener, Date
                     val result = response.body()
                     if (result != null) {
                         if (result.getStatus()!!) {
-                            sendTelpPasangan2(idDebitur)
+                            sendImg(strImagePasangan)
                         } else {
                             Log.e("telp1", response.raw().toString())
                             Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
