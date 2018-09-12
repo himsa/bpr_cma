@@ -1,5 +1,6 @@
 package com.layanacomputindo.bprcma
 
+import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.SharedPreferences
@@ -16,6 +17,7 @@ import com.layanacomputindo.bprcma.model.Aproval
 import com.layanacomputindo.bprcma.model.CurrentPage
 import com.layanacomputindo.bprcma.model.Result
 import com.layanacomputindo.bprcma.rest.RestClient
+import com.layanacomputindo.bprcma.util.Config
 import kotlinx.android.synthetic.main.activity_aproval_list.*
 import kotlinx.android.synthetic.main.toolbar.*
 import retrofit2.Call
@@ -52,6 +54,11 @@ class AprovalListActivity : AppCompatActivity(), View.OnClickListener {
         pDialog = ProgressDialog.show(this,
                 "",
                 "Tunggu Sebentar!")
+        sharedPreferences = getSharedPreferences(Config.PREF_NAME,
+                Activity.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("from", "repeat")
+        editor.apply()
         rvCustomerAproval = rv_customer_aproval
         lm = LinearLayoutManager(this@AprovalListActivity)
         rvCustomerAproval.setHasFixedSize(true)
