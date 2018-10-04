@@ -34,8 +34,7 @@
                     android:id="@+id/rb_usaha"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/txt_rb_usaha"
-                    android:checked="true"/>
+                    android:text="@string/txt_rb_usaha"/>
 
                 <RadioButton
                     android:id="@+id/rb_karyawan"
@@ -88,6 +87,7 @@
                     android:scaleType="centerCrop"/>
             </LinearLayout>
             <TextView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/txt_foto_pendukung_usaha"

@@ -6,20 +6,22 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
 import android.util.Base64
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import com.layanacomputindo.bprcma.MenuActivity
 import com.layanacomputindo.bprcma.R
+import com.layanacomputindo.bprcma.model.FotoTanah
 import com.layanacomputindo.bprcma.model.Result
 import com.layanacomputindo.bprcma.model.UserId
 import com.layanacomputindo.bprcma.rest.RestClient
 import com.layanacomputindo.bprcma.util.Config
+import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.activity_foto_kondisi_tanah.*
@@ -58,7 +60,10 @@ class FotoKondisiTanahActivity : AppCompatActivity(), View.OnClickListener {
         setPreferences()
 
         if(sharedPreferences.getString("from", "") == "repeat"){
-            setDummy()
+            pDialog = ProgressDialog.show(this,
+                    "",
+                    "Tunggu Sebentar!")
+            getData()
         }
 
         et_rmh_muka.setOnClickListener(this)
@@ -71,6 +76,72 @@ class FotoKondisiTanahActivity : AppCompatActivity(), View.OnClickListener {
         et_rmh_sktr2.setOnClickListener(this)
 
         btn_next_foto_tanah.setOnClickListener(this)
+    }
+
+    private fun getData() {
+        val service by lazy {
+            RestClient.getClient(this)
+        }
+        val call = service.getJaminanTanahFoto(idJaminan)
+        call.enqueue(object: Callback<Result<FotoTanah>>{
+            override fun onFailure(call: Call<Result<FotoTanah>>?, t: Throwable?) {
+                pDialog!!.dismiss()
+                Log.e("on Failure", t.toString())
+                Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<Result<FotoTanah>>, response: Response<Result<FotoTanah>>) {
+                Log.d("debitur", "Status Code = " + response.code())
+                if(response.isSuccessful){
+                    val result = response.body()
+                    if (result != null) {
+                        if (result.getStatus()!!) {
+                            val data = result.getData()
+                            pDialog!!.dismiss()
+                            if (data != null){
+                                Picasso.with(this@FotoKondisiTanahActivity)
+                                        .load(data.getTampakMuka())
+                                        .error(android.R.drawable.stat_notify_error).into(et_rmh_muka)
+                                Picasso.with(this@FotoKondisiTanahActivity)
+                                        .load(data.getTampakBelakang())
+                                        .error(android.R.drawable.stat_notify_error).into(et_rmh_blkng)
+                                Picasso.with(this@FotoKondisiTanahActivity)
+                                        .load(data.getTampakSisiKanan())
+                                        .error(android.R.drawable.stat_notify_error).into(et_rmh_kanan)
+                                Picasso.with(this@FotoKondisiTanahActivity)
+                                        .load(data.getTampakSisiKiri())
+                                        .error(android.R.drawable.stat_notify_error).into(et_rmh_kiri)
+                                Picasso.with(this@FotoKondisiTanahActivity)
+                                        .load(data.getTampakBelakang())
+                                        .error(android.R.drawable.stat_notify_error).into(et_rmh_blkng)
+                                Picasso.with(this@FotoKondisiTanahActivity)
+                                        .load(data.getTampakDalam())
+                                        .error(android.R.drawable.stat_notify_error).into(et_rmh_dalam)
+                                Picasso.with(this@FotoKondisiTanahActivity)
+                                        .load(data.getTampakLain())
+                                        .error(android.R.drawable.stat_notify_error).into(et_rmh_lain)
+                                Picasso.with(this@FotoKondisiTanahActivity)
+                                        .load(data.getTampakSekitar1())
+                                        .error(android.R.drawable.stat_notify_error).into(et_rmh_sktr1)
+                                Picasso.with(this@FotoKondisiTanahActivity)
+                                        .load(data.getTampakSekitar2())
+                                        .error(android.R.drawable.stat_notify_error).into(et_rmh_sktr2)
+                            }
+
+                        } else {
+                            pDialog!!.dismiss()
+                            Log.e("debitur", response.raw().toString())
+                            Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }else {
+                    pDialog!!.dismiss()
+                    Log.e("debitur", response.raw().toString())
+                    Toast.makeText(baseContext, response.message(), Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        })
     }
 
     override fun onClick(p0: View) {
@@ -213,7 +284,7 @@ class FotoKondisiTanahActivity : AppCompatActivity(), View.OnClickListener {
 
     fun getStringImage(bmp: Bitmap): String {
         val baos = ByteArrayOutputStream()
-        bmp.compress(Bitmap.CompressFormat.JPEG, 50, baos)
+        bmp.compress(Bitmap.CompressFormat.JPEG, 30, baos)
         val imageBytes = baos.toByteArray()
         return Base64.encodeToString(imageBytes, Base64.DEFAULT)
     }

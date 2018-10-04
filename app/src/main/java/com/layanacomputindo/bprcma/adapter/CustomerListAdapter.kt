@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.layanacomputindo.bprcma.DetailCustomerActivity
 import com.layanacomputindo.bprcma.ListKreditActivity
 import com.layanacomputindo.bprcma.R
@@ -87,9 +87,8 @@ class CustomerListAdapter(private var mList: ArrayList<Debitur>, val context: Co
                 "disetujui" -> {
                     holder.tvStatus.setBackgroundResource(R.drawable.rounded_corner_green)
                 }
-                "cancel" -> {
+                "proses" -> {
                     holder.tvStatus.setBackgroundResource(R.drawable.rounded_corner_yellow)
-                    holder.tvStatus.text = "draft"
                 }
                 "ditolak" -> {
                     holder.tvStatus.setBackgroundResource(R.drawable.rounded_corner_red)

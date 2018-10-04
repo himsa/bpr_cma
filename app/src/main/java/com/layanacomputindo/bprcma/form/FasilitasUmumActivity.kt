@@ -6,19 +6,22 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
 import android.util.Base64
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import com.layanacomputindo.bprcma.R
+import com.layanacomputindo.bprcma.model.FasilitasUmum
 import com.layanacomputindo.bprcma.model.Result
+import com.layanacomputindo.bprcma.model.TanahBangunan
 import com.layanacomputindo.bprcma.model.UserId
 import com.layanacomputindo.bprcma.rest.RestClient
 import com.layanacomputindo.bprcma.util.Config
+import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import im.delight.android.location.SimpleLocation
@@ -61,9 +64,117 @@ class FasilitasUmumActivity : AppCompatActivity(), View.OnClickListener {
             SimpleLocation.openSettings(this)
         }
 
+        if(sharedPreferences.getString("from", "") == "repeat"){
+            pDialog = ProgressDialog.show(this,
+                    "",
+                    "Tunggu Sebentar!")
+            getData()
+            getDenah()
+        }
+
         btn_next_fasilitas_umum.setOnClickListener(this)
         pick_location.setOnClickListener(this)
         img_denah.setOnClickListener(this)
+    }
+
+    private fun getDenah() {
+        val service by lazy {
+            RestClient.getClient(this)
+        }
+        val call = service.getJaminanTanah(idJaminan)
+        call.enqueue(object: Callback<Result<TanahBangunan>>{
+            override fun onFailure(call: Call<Result<TanahBangunan>>?, t: Throwable?) {
+                pDialog!!.dismiss()
+                Log.e("on Failure", t.toString())
+                Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<Result<TanahBangunan>>, response: Response<Result<TanahBangunan>>) {
+                Log.d("tanah", "Status Code = " + response.code())
+                if(response.isSuccessful){
+                    val result = response.body()
+                    if (result != null) {
+                        if (result.getStatus()!!) {
+                            val data = result.getData()
+                            pDialog!!.dismiss()
+                            if (data != null){
+                                Picasso.with(this@FasilitasUmumActivity)
+                                        .load(data.getDenahLokasi())
+                                        .error(android.R.drawable.stat_notify_error).into(img_denah)
+                                if(data.getLatitude().isNullOrEmpty() && data.getLongitude().isNullOrEmpty()){
+
+                                }else{
+                                    lat = data.getLatitude()!!.toDouble()
+                                    long = data.getLongitude()!!.toDouble()
+                                    tv_location.text = resources.getText(R.string.lokasi_disimpan)
+                                    pick_location.isClickable = false
+                                    pick_location.setImageResource(R.drawable.icon_lokasi_grey)
+                                }
+                            }
+
+                        } else {
+                            Log.e("tanah", response.raw().toString())
+                            Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+
+        })
+    }
+
+    private fun getData() {
+        val service by lazy {
+            RestClient.getClient(this)
+        }
+        val call = service.getJaminanTanahFasilitasUmum(idJaminan)
+        call.enqueue(object: Callback<Result<FasilitasUmum>>{
+            override fun onFailure(call: Call<Result<FasilitasUmum>>?, t: Throwable?) {
+                pDialog!!.dismiss()
+                Log.e("on Failure", t.toString())
+                Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<Result<FasilitasUmum>>, response: Response<Result<FasilitasUmum>>) {
+                Log.d("fasilitasumum", "Status Code = " + response.code())
+                if(response.isSuccessful){
+                    val result = response.body()
+                    if (result != null) {
+                        if (result.getStatus()!!) {
+                            val data = result.getData()
+                            pDialog!!.dismiss()
+                            if (data != null){
+                                sw_angktn_umum.isChecked = set(data.getAngkutanUmum())
+                                sw_psr.isChecked = set(data.getPasar())
+                                sw_sklh.isChecked = set(data.getSekolah())
+                                sw_rs.isChecked = set(data.getRumahSakitPuskesmas())
+                                sw_hbrn.isChecked = set(data.getHiburan())
+                                sw_prkntrn.isChecked = set(data.getPerkantoran())
+                                sw_olg.isChecked = set(data.getSaranaOlahRaga())
+                                sw_tmp_ibdh.isChecked = set(data.getTempatIbadah())
+                            }
+                        } else {
+                            pDialog!!.dismiss()
+                            Log.e("fasilitasumum", response.raw().toString())
+                            Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }else {
+                    pDialog!!.dismiss()
+                    Log.e("fasilitasumum", response.raw().toString())
+                    Toast.makeText(baseContext, response.message(), Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        })
+    }
+
+    private fun set(data: Any?): Boolean {
+        return data.toString().equals("1", true)
+    }
+
+    private fun setdata(data: Boolean): Int {
+        return if (data)  1 else 0
     }
 
     private fun setPreferences() {
@@ -100,38 +211,9 @@ class FasilitasUmumActivity : AppCompatActivity(), View.OnClickListener {
         val service by lazy {
             RestClient.getClient(this)
         }
-        val call = service.sendTanahFasilitasUmum(idJaminan, sw_angktn_umum.isChecked, sw_psr.isChecked, sw_sklh.isChecked, sw_rs.isChecked,
-                sw_hbrn.isChecked, sw_prkntrn.isChecked, sw_olg.isChecked, sw_tmp_ibdh.isChecked)
-        call.enqueue(object : Callback<Result<UserId>> {
-            override fun onFailure(call: Call<Result<UserId>>?, t: Throwable?) {
-                pDialog!!.dismiss()
-                Log.e("on Failure", t.toString())
-                Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_LONG).show()
-            }
-
-            override fun onResponse(call: Call<Result<UserId>>, response: Response<Result<UserId>>) {
-                Log.d("FasilitasUmum", "Status Code = " + response.code())
-                if(response.isSuccessful){
-                    val result = response.body()
-                    if (result != null) {
-                        if (result.getStatus()!!) {
-                            sendDenah()
-                        } else {
-                            Log.e("FasilitasUmum", response.raw().toString())
-                            Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
-            }
-
-        })
-    }
-
-    private fun sendDenah() {
-        val service by lazy {
-            RestClient.getClient(this)
-        }
-        val call = service.sendDenahLokasi(idJaminan, strImageDenah, lat.toString(), long.toString())
+        val call = service.sendTanahFasilitasUmum(idJaminan, setdata(sw_angktn_umum.isChecked), setdata(sw_psr.isChecked), setdata(sw_sklh.isChecked), setdata(sw_rs.isChecked),
+                setdata(sw_hbrn.isChecked), setdata(sw_prkntrn.isChecked), setdata(sw_olg.isChecked), setdata(sw_tmp_ibdh.isChecked),
+                strImageDenah, lat.toString(), long.toString())
         call.enqueue(object : Callback<Result<UserId>> {
             override fun onFailure(call: Call<Result<UserId>>?, t: Throwable?) {
                 pDialog!!.dismiss()
@@ -148,10 +230,15 @@ class FasilitasUmumActivity : AppCompatActivity(), View.OnClickListener {
                             pDialog!!.dismiss()
                             startActivity(Intent(applicationContext, FotoKondisiTanahActivity::class.java))
                         } else {
+                            pDialog!!.dismiss()
                             Log.e("FasilitasUmum", response.raw().toString())
                             Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
                         }
                     }
+                }else {
+                    pDialog!!.dismiss()
+                    Log.e("FasilitasUmum", response.raw().toString())
+                    Toast.makeText(baseContext, response.message(), Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -181,7 +268,7 @@ class FasilitasUmumActivity : AppCompatActivity(), View.OnClickListener {
 
     fun getStringImage(bmp: Bitmap): String {
         val baos = ByteArrayOutputStream()
-        bmp.compress(Bitmap.CompressFormat.JPEG, 50, baos)
+        bmp.compress(Bitmap.CompressFormat.JPEG, 30, baos)
         val imageBytes = baos.toByteArray()
         return Base64.encodeToString(imageBytes, Base64.DEFAULT)
     }

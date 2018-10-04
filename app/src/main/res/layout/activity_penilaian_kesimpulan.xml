@@ -265,58 +265,17 @@
                         <Space
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/padding5" />
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="2">
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="@dimen/sub_sub_title"
-                                android:padding="@dimen/padding5"
-                                android:text="@string/txt_luas_sesuai_fisik"/>
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:layout_weight="1">
-                                <EditText
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Rp"
-                                    android:focusable="false"
-                                    android:textSize="@dimen/sub_title"
-                                    android:padding="@dimen/padding5"
-                                    android:background="@drawable/rounded_corner_grey"/>
-                                <EditText
-                                    android:id="@+id/et_luas_sesuai_fisik"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:padding="@dimen/padding5"
-                                    android:textSize="@dimen/sub_title"
-                                    android:background="@drawable/rounded_corner_white"
-                                    android:inputType="number"
-                                    android:imeOptions="actionNext"
-                                    android:maxLines="1"
-                                    android:ems="10"/>
-                            </LinearLayout>
-                        </LinearLayout>
-                        <Space
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/padding5" />
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="@dimen/sub_title"
-                                android:padding="@dimen/padding5"
-                                android:text="@string/txt_nilai_bngn"
                                 android:layout_alignParentStart="true"
-                                android:layout_alignParentLeft="true"/>
+                                android:layout_alignParentLeft="true"
+                                android:textSize="@dimen/sub_sub_title"
+                                android:padding="@dimen/padding5"
+                                android:text="@string/txt_luas_sesuai_fisik"/>
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -349,6 +308,52 @@
                                         android:textColor="@color/black"
                                         android:text="m2"
                                         android:textSize="@dimen/sub_title" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </RelativeLayout>
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/padding5" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sub_title"
+                                android:padding="@dimen/padding5"
+                                android:text="@string/txt_nilai_bngn"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentLeft="true"/>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true">
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_weight="1">
+                                    <EditText
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Rp"
+                                        android:focusable="false"
+                                        android:textSize="@dimen/sub_title"
+                                        android:padding="@dimen/padding5"
+                                        android:background="@drawable/rounded_corner_grey"/>
+                                    <EditText
+                                        android:id="@+id/et_luas_sesuai_fisik"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:padding="@dimen/padding5"
+                                        android:textSize="@dimen/sub_title"
+                                        android:background="@drawable/rounded_corner_white"
+                                        android:inputType="number"
+                                        android:imeOptions="actionNext"
+                                        android:maxLines="1"
+                                        android:ems="10"/>
                                 </LinearLayout>
                             </LinearLayout>
                         </RelativeLayout>

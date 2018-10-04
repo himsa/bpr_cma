@@ -27,7 +27,7 @@
                 android:padding="@dimen/padding5"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sub_title"/>
-            <android.support.design.card.MaterialCardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/white"
@@ -43,7 +43,7 @@
                     android:imeOptions="actionNext"
                     android:maxLines="1"
                     android:ems="10"/>
-            </android.support.design.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
                 android:padding="@dimen/padding5"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sub_title"/>
-            <android.support.design.card.MaterialCardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/white"
@@ -67,7 +67,7 @@
                     android:imeOptions="actionNext"
                     android:maxLines="1"
                     android:ems="10"/>
-            </android.support.design.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
                 android:padding="@dimen/padding5"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sub_title"/>
-            <android.support.design.card.MaterialCardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/white"
@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/padding5"
                     android:textColor="@color/black"/>
-            </android.support.design.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
                 android:padding="@dimen/padding5"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sub_title"/>
-            <android.support.design.card.MaterialCardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/white"
@@ -110,7 +110,7 @@
                     android:imeOptions="actionNext"
                     android:maxLines="1"
                     android:ems="10"/>
-            </android.support.design.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
                 android:padding="@dimen/padding5"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sub_title"/>
-            <android.support.design.card.MaterialCardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/white"
@@ -148,8 +148,8 @@
                         android:background="@color/white"
                         android:src="@drawable/ic_round_add_24px"/>
                 </RelativeLayout>
-            </android.support.design.card.MaterialCardView>
-            <android.support.design.card.MaterialCardView
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cv_telp2"
                 android:visibility="gone"
                 android:layout_width="match_parent"
@@ -171,7 +171,7 @@
                         android:maxLines="1"
                         android:ems="10"/>
                 </RelativeLayout>
-            </android.support.design.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -179,7 +179,7 @@
                 android:padding="@dimen/padding5"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sub_title"/>
-            <android.support.design.card.MaterialCardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/white"
@@ -192,7 +192,7 @@
                     android:textColor="@color/black"
                     android:background="@color/white"
                     android:inputType="textMultiLine"/>
-            </android.support.design.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <TextView
                 android:layout_width="match_parent"
@@ -278,7 +278,7 @@
                     </LinearLayout>
                 </LinearLayout>
             </HorizontalScrollView>
-            <android.support.design.button.MaterialButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_next_inf_nas_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

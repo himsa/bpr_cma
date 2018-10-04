@@ -5,9 +5,8 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
 import android.text.InputType
 import android.util.Log
 import android.view.MenuItem
@@ -16,6 +15,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import com.layanacomputindo.bprcma.R
 import com.layanacomputindo.bprcma.model.Result
 import com.layanacomputindo.bprcma.model.UserId
@@ -119,20 +119,17 @@ class AnalisisUsahaPart2Activity : AppCompatActivity(), RadioGroup.OnCheckedChan
             R.id.rb_milik_sendiri -> {
                 val radioButton = findViewById(R.id.rb_milik_sendiri) as RadioButton
 
-                Toast.makeText(this,
-                        radioButton.getText(), Toast.LENGTH_SHORT).show()
+                uploadStatus = radioButton.text.toString()
             }
             R.id.rb_keluarga -> {
                 val radioButton = findViewById(R.id.rb_keluarga) as RadioButton
 
-                Toast.makeText(this,
-                        radioButton.getText(), Toast.LENGTH_SHORT).show()
+                uploadStatus = radioButton.text.toString()
             }
             R.id.rb_kerjasama -> {
                 val radioButton = findViewById(R.id.rb_kerjasama) as RadioButton
 
-                Toast.makeText(this,
-                        radioButton.getText(), Toast.LENGTH_SHORT).show()
+                uploadStatus = radioButton.text.toString()
             }
         }
     }

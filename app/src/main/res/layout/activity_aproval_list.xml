@@ -27,16 +27,16 @@
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="@dimen/padding3"-->
         <!--android:layout_below="@id/spinner"/>-->
-        <android.support.v4.widget.SwipeRefreshLayout
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/srlRefresh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_customer_aproval"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/grey_bg"/>
-        </android.support.v4.widget.SwipeRefreshLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         <ProgressBar
             android:id="@+id/pbLoading"
             android:layout_width="50dp"

@@ -4,12 +4,12 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.SharedPreferences
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.RecyclerView
 import com.layanacomputindo.bprcma.adapter.MyPagerAdapter
 import com.layanacomputindo.bprcma.form.PemeriksaanJaminanActivity
 import com.layanacomputindo.bprcma.util.Config

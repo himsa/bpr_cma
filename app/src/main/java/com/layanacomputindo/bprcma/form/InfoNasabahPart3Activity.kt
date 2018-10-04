@@ -8,17 +8,18 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.support.v7.app.AppCompatActivity
+import android.graphics.drawable.BitmapDrawable
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.Toolbar
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import android.util.Base64
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import com.layanacomputindo.bprcma.R
 import com.layanacomputindo.bprcma.model.*
 import com.layanacomputindo.bprcma.rest.RestClient
@@ -28,12 +29,10 @@ import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import im.delight.android.location.SimpleLocation
 import kotlinx.android.synthetic.main.activity_info_nasabah_part3.*
-import kotlinx.android.synthetic.main.toolbar_nasabah.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.ByteArrayOutputStream
-import java.io.FileNotFoundException
 
 class InfoNasabahPart3Activity : AppCompatActivity(), View.OnClickListener {
     var flagPhoto = 0
@@ -77,12 +76,10 @@ class InfoNasabahPart3Activity : AppCompatActivity(), View.OnClickListener {
             uploadStatus = itemAtPosition
         })
         if(sharedPreferences.getString("from", "") == "repeat"){
-//            pDialog = ProgressDialog.show(this,
-//                    "",
-//                    "Tunggu Sebentar!")
-//            getData()
-//            getFoto()
-            setDummy()
+            pDialog = ProgressDialog.show(this,
+                    "",
+                    "Tunggu Sebentar!")
+            getData()
         }
 
         btn_next_inf_nas_3.setOnClickListener(this)
@@ -93,6 +90,7 @@ class InfoNasabahPart3Activity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun getData() {
+        Log.d("debitur", "Id = " + idDebitur)
         val service by lazy {
             RestClient.getClient(this)
         }
@@ -127,6 +125,24 @@ class InfoNasabahPart3Activity : AppCompatActivity(), View.OnClickListener {
                                         sp_status.setSelection(3)
                                     }
                                 }
+                                Picasso.with(this@InfoNasabahPart3Activity)
+                                        .load(data.getFotoDokumen())
+                                        .error(android.R.drawable.stat_notify_error).into(img_st_tmp_tgl)
+                                Picasso.with(this@InfoNasabahPart3Activity)
+                                        .load(data.getFoto1())
+                                        .error(android.R.drawable.stat_notify_error).into(img_tmp_tgl_1)
+                                Picasso.with(this@InfoNasabahPart3Activity)
+                                        .load(data.getFoto2())
+                                        .error(android.R.drawable.stat_notify_error).into(img_tmp_tgl_2)
+                                if(data.getLatitude().isNullOrEmpty() && data.getLongitude().isNullOrEmpty()){
+
+                                }else{
+                                    lat = data.getLatitude()!!.toDouble()
+                                    long = data.getLongitude()!!.toDouble()
+                                }
+                                tv_location.text = resources.getText(R.string.lokasi_disimpan)
+                                pick_location.isClickable = false
+                                pick_location.setImageResource(R.drawable.icon_lokasi_grey)
                             }
 
                         } else {
@@ -239,10 +255,18 @@ class InfoNasabahPart3Activity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun next() {
+        if(sharedPreferences.getString("from", "") == "repeat"){
+            if(img_st_tmp_tgl.drawable != null && img_tmp_tgl_1.drawable != null && img_tmp_tgl_2.drawable != null){
+                strImage1 = getStringImage((img_st_tmp_tgl.getDrawable() as BitmapDrawable).bitmap)
+                strImage2 = getStringImage((img_tmp_tgl_1.getDrawable() as BitmapDrawable).bitmap)
+                strImage3 = getStringImage((img_tmp_tgl_2.getDrawable() as BitmapDrawable).bitmap)
+            }
+        }
         pDialog = ProgressDialog.show(this,
                 "",
                 "Tunggu Sebentar!")
-        if(uploadStatus != "" && strImage1 != "" && strImage2 != "" && strImage3 !=""){
+        if(uploadStatus != "" && strImage1 != "" && strImage2 != "" && strImage3 !="" && lat.toString() != "" &&
+                long.toString() != ""){
             submitData()
         }else{
             pDialog!!.dismiss()
@@ -254,114 +278,9 @@ class InfoNasabahPart3Activity : AppCompatActivity(), View.OnClickListener {
         val service by lazy {
             RestClient.getClient(this)
         }
-        val call = service.sendTempatTinggalDebitur(idDebitur, lat.toString(), long.toString(), uploadStatus)
+        val call = service.sendTempatTinggalDebitur(idDebitur, lat.toString(), long.toString(), uploadStatus, strImage1, strImage2, strImage3)
         call.enqueue(object : Callback<Result<UserId>>{
             override fun onResponse(call: Call<Result<UserId>>, response: Response<Result<UserId>>) {
-                Log.d("tmp tggl", "Status Code = " + response.code())
-                if(response.isSuccessful){
-                    val result = response.body()
-                    if (result != null) {
-                        if (result.getStatus()!!) {
-                            sendFotoTmpTggl(idDebitur, strImage1)
-                        } else {
-                            pDialog!!.dismiss()
-                            Log.e("debitur", response.raw().toString())
-                            Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }else{
-                    pDialog!!.dismiss()
-                    Log.e("debitur", response.raw().toString())
-                    Toast.makeText(baseContext, response.message(), Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<Result<UserId>>, t: Throwable?) {
-                pDialog!!.dismiss()
-                Log.e("on Failure", t.toString())
-                Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_LONG).show()
-            }
-
-        })
-    }
-
-    private fun sendFotoTmpTggl(idDebitur: Int, strImage: String) {
-        val service by lazy {
-            RestClient.getClient(this)
-        }
-        val call = service.sendFotoTempatTinggalDebitur(idDebitur, strImage)
-        call.enqueue(object : Callback<Results<UserId>>{
-            override fun onResponse(call: Call<Results<UserId>>, response: Response<Results<UserId>>) {
-                Log.d("tmp tggl", "Status Code = " + response.code())
-                if(response.isSuccessful){
-                    val result = response.body()
-                    if (result != null) {
-                        if (result.getStatus()!!) {
-                            sendFotoTmpTggl2(idDebitur, strImage2)
-                        } else {
-                            pDialog!!.dismiss()
-                            Log.e("debitur", response.raw().toString())
-                            Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }else{
-                    pDialog!!.dismiss()
-                    Log.e("debitur", response.raw().toString())
-                    Toast.makeText(baseContext, response.message(), Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<Results<UserId>>, t: Throwable?) {
-                pDialog!!.dismiss()
-                Log.e("on Failure", t.toString())
-                Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_SHORT).show()
-            }
-
-        })
-    }
-
-    private fun sendFotoTmpTggl2(idDebitur: Int, strImage: String) {
-        val service by lazy {
-            RestClient.getClient(this)
-        }
-        val call = service.sendFotoTempatTinggalDebitur(idDebitur, strImage)
-        call.enqueue(object : Callback<Results<UserId>>{
-            override fun onResponse(call: Call<Results<UserId>>, response: Response<Results<UserId>>) {
-                Log.d("tmp tggl", "Status Code = " + response.code())
-                if(response.isSuccessful){
-                    val result = response.body()
-                    if (result != null) {
-                        if (result.getStatus()!!) {
-                            sendFotoTmpTggl3(idDebitur, strImage3)
-                        } else {
-                            pDialog!!.dismiss()
-                            Log.e("debitur", response.raw().toString())
-                            Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }else{
-                    pDialog!!.dismiss()
-                    Log.e("debitur", response.raw().toString())
-                    Toast.makeText(baseContext, response.message(), Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<Results<UserId>>, t: Throwable?) {
-                pDialog!!.dismiss()
-                Log.e("on Failure", t.toString())
-                Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_SHORT).show()
-            }
-
-        })
-    }
-
-    private fun sendFotoTmpTggl3(idDebitur: Int, strImage: String) {
-        val service by lazy {
-            RestClient.getClient(this)
-        }
-        val call = service.sendFotoTempatTinggalDebitur(idDebitur, strImage)
-        call.enqueue(object : Callback<Results<UserId>>{
-            override fun onResponse(call: Call<Results<UserId>>, response: Response<Results<UserId>>) {
                 Log.d("tmp tggl", "Status Code = " + response.code())
                 if(response.isSuccessful){
                     val result = response.body()
@@ -371,21 +290,21 @@ class InfoNasabahPart3Activity : AppCompatActivity(), View.OnClickListener {
                             startActivity(Intent(this@InfoNasabahPart3Activity, InfoUsahaPkrjnPart1Activity::class.java))
                         } else {
                             pDialog!!.dismiss()
-                            Log.e("debitur", response.raw().toString())
+                            Log.e("tmp tggl", response.raw().toString())
                             Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
                         }
                     }
                 }else{
                     pDialog!!.dismiss()
-                    Log.e("debitur", response.raw().toString())
+                    Log.e("tmp tggl", response.raw().toString())
                     Toast.makeText(baseContext, response.message(), Toast.LENGTH_SHORT).show()
                 }
             }
 
-            override fun onFailure(call: Call<Results<UserId>>, t: Throwable?) {
+            override fun onFailure(call: Call<Result<UserId>>, t: Throwable?) {
                 pDialog!!.dismiss()
                 Log.e("on Failure", t.toString())
-                Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_LONG).show()
             }
 
         })
@@ -423,7 +342,7 @@ class InfoNasabahPart3Activity : AppCompatActivity(), View.OnClickListener {
 
     fun getStringImage(bmp: Bitmap): String {
         val baos = ByteArrayOutputStream()
-        bmp.compress(Bitmap.CompressFormat.JPEG, 50, baos)
+        bmp.compress(Bitmap.CompressFormat.JPEG, 30, baos)
         val imageBytes = baos.toByteArray()
         return Base64.encodeToString(imageBytes, Base64.DEFAULT)
     }

@@ -1,8 +1,8 @@
 package com.layanacomputindo.bprcma.adapter
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import com.layanacomputindo.bprcma.fragment.FirstFragment
 import com.layanacomputindo.bprcma.fragment.SecondFragment
 import com.layanacomputindo.bprcma.fragment.ThirdFragment

@@ -4,9 +4,9 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.SharedPreferences
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
+import androidx.appcompat.widget.Toolbar
 import android.text.InputType
 import android.util.Log
 import android.view.MenuItem
@@ -71,11 +71,10 @@ class SumberPengembalianKreditActivity : AppCompatActivity(), View.OnClickListen
     override fun onClick(p0: View) {
         when(p0.id){
             R.id.btn_next_smbr_pngmbln -> {
-//                pDialog = ProgressDialog.show(this,
-//                        "",
-//                        "Tunggu Sebentar!")
-//                submitData()
-                startActivity(Intent(this@SumberPengembalianKreditActivity, AnalisisKeuanganActivity::class.java))
+                pDialog = ProgressDialog.show(this,
+                        "",
+                        "Tunggu Sebentar!")
+                submitData()
             }
         }
     }

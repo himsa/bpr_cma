@@ -259,7 +259,7 @@
     <string name="txt_nomor_su">Nomor SU / Tanggal SU</string>
     <string name="txt_an_pmg_hak">Atas nama Pemegang Hak</string>
     <string name="txt_tgl_brkr_hak">Tanggal Berakhir Hak</string>
-    <string name="txt_nmr_si_m">Nomor SUrat Ijin Membangun</string>
+    <string name="txt_nmr_si_m">Nomor Surat Ijin Membangun</string>
     <string name="txt_nmr_nib_tanah">Nomor NIB Tanah</string>
     <string name="txt_asl_hk_ats_tnh">Asal hak atas tanah</string>
     <string name="txt_rwt_sngkt_tnh">Riwayat singkat tanah</string>
@@ -409,4 +409,5 @@
     <string name="txt_tolak">TOLAK</string>
     <string name="txt_setuju">SETUJU</string>
     <string name="cekData">Data Harus Lengkap</string>
+    <string name="txt_kondisi">Kondisi</string>
 </resources>

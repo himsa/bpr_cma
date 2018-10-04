@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.SharedPreferences
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
@@ -13,6 +12,7 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import com.layanacomputindo.bprcma.model.Result
 import com.layanacomputindo.bprcma.model.Token

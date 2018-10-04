@@ -481,7 +481,7 @@
                     android:text="@string/txt_kondisi_lingkungan"/>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/full_rounded_corner_white">
                     <EditText
                         android:id="@+id/et_kondisi_lingkungan"

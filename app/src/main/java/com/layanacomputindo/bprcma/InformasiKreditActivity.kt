@@ -4,16 +4,16 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.isapanah.awesomespinner.AwesomeSpinner
 import com.layanacomputindo.bprcma.adapter.CustomerListAdapter
 import com.layanacomputindo.bprcma.model.CurrentPage
@@ -22,6 +22,7 @@ import com.layanacomputindo.bprcma.model.Debitur
 import com.layanacomputindo.bprcma.model.Result
 import com.layanacomputindo.bprcma.rest.RestClient
 import com.layanacomputindo.bprcma.util.Config
+import com.layanacomputindo.bprcma.util.EndlessRecyclerViewScrollListener
 import kotlinx.android.synthetic.main.activity_informasi_kredit.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,6 +38,8 @@ class InformasiKreditActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var sharedPreferences: SharedPreferences
 
     private var pDialog: ProgressDialog? = null
+
+    private var scrollListener: EndlessRecyclerViewScrollListener? = null
 
     private lateinit var spFilter: AwesomeSpinner
     private lateinit var spSortBy: AwesomeSpinner
@@ -82,6 +85,16 @@ class InformasiKreditActivity : AppCompatActivity(), View.OnClickListener {
         rvCustomer.setHasFixedSize(true)
         rvCustomer.layoutManager = lm
         addData(sharedPreferences.getString("status", ""))
+        scrollListener = object : EndlessRecyclerViewScrollListener(lm as LinearLayoutManager) {
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView) {
+                // Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to the bottom of the list
+//                loadNextDataFromApi(page)
+                Log.e("PAGE", page.toString())
+                addNextData(sharedPreferences.getString("status", ""), page + 1)
+            }
+        }
+        rvCustomer.addOnScrollListener(scrollListener as EndlessRecyclerViewScrollListener)
         rvCustomer.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val topRowVerticalPosition = if (recyclerView.childCount == 0) 0 else recyclerView.getChildAt(0).top
@@ -100,14 +113,56 @@ class InformasiKreditActivity : AppCompatActivity(), View.OnClickListener {
         })
     }
 
+    private fun addNextData(status: String, page: Int) {
+        val service by lazy {
+            RestClient.getClient(this)
+        }
+        val call = service.getInfoKreditByStatusNext(status, page)
+        call.enqueue(object: Callback<Result<CurrentPage<Debitur>>>{
+            override fun onFailure(call: Call<Result<CurrentPage<Debitur>>>?, t: Throwable?) {
+                pDialog!!.dismiss()
+                Log.e("on Failure", t.toString())
+                Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<Result<CurrentPage<Debitur>>>?, response: Response<Result<CurrentPage<Debitur>>>?) {
+                Log.d("debitur", "Status Code = " + response!!.code())
+                if(response.isSuccessful){
+                    pDialog!!.dismiss()
+                    val result = response.body()
+                    if (result != null) {
+                        if (result.getStatus()!!) {
+                            val page = result.getData()
+                            if(page != null){
+                                if(true){
+                                    for (items in page.getData()!!){
+                                        customerArrayList.add(items)
+                                    }
+                                    rvAdapter.notifyDataSetChanged()
+                                }
+                                else{
+                                    Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        } else {
+                            Log.e("debitur", response.raw().toString())
+                            Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+
+        })
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu, this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.toolbar_menu, menu)
         val myActionMenuItem = menu.findItem(R.id.app_bar_search)
-        val searchView = myActionMenuItem.actionView as android.support.v7.widget.SearchView
+        val searchView = myActionMenuItem.actionView as androidx.appcompat.widget.SearchView
         searchView.setQueryHint(resources.getText(R.string.search_name))
         searchView.setIconified(false)
-        searchView.setOnQueryTextListener(object : android.support.v7.widget.SearchView.OnQueryTextListener {
+        searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 // Toast like print
                 Toast.makeText(baseContext, query, Toast.LENGTH_SHORT).show()

@@ -61,8 +61,7 @@
                     android:id="@+id/rb_motor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/txt_rb_motor"
-                    android:checked="true"/>
+                    android:text="@string/txt_rb_motor"/>
                 <RadioButton
                     android:id="@+id/rb_mobil_niaga"
                     android:layout_width="wrap_content"
@@ -101,8 +100,7 @@
                     android:id="@+id/rb_kend_pribadi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/txt_rb_kend_pribadi"
-                    android:checked="true"/>
+                    android:text="@string/txt_rb_kend_pribadi"/>
                 <RadioButton
                     android:id="@+id/rb_kend_operasional_usaha"
                     android:layout_width="wrap_content"
@@ -282,7 +280,7 @@
                     android:padding="@dimen/padding5"
                     android:textSize="@dimen/sub_title"
                     android:background="@drawable/full_rounded_corner_white"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:imeOptions="actionNext"
                     android:maxLines="1"
                     android:ems="10"/>
@@ -309,7 +307,7 @@
                     android:padding="@dimen/padding5"
                     android:textSize="@dimen/sub_title"
                     android:background="@drawable/full_rounded_corner_white"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:imeOptions="actionNext"
                     android:maxLines="1"
                     android:ems="10"/>
@@ -340,8 +338,7 @@
                         android:id="@+id/rb_bukti_gesek_ada"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/txt_rb_bukti_gesek_ada"
-                        android:checked="true"/>
+                        android:text="@string/txt_rb_bukti_gesek_ada"/>
                     <RadioButton
                         android:id="@+id/rb_bukti_gesek_tdk"
                         android:layout_width="wrap_content"
@@ -402,8 +399,7 @@
                         android:id="@+id/rb_bukti_gesek_ada1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/txt_rb_bukti_gesek_ada"
-                        android:checked="true"/>
+                        android:text="@string/txt_rb_bukti_gesek_ada"/>
                     <RadioButton
                         android:id="@+id/rb_bukti_gesek_tdk1"
                         android:layout_width="wrap_content"
@@ -568,7 +564,7 @@
                     android:padding="@dimen/padding5"
                     android:textSize="@dimen/sub_title"
                     android:background="@drawable/full_rounded_corner_white"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:imeOptions="actionNext"
                     android:maxLines="1"
                     android:ems="10"/>
@@ -656,7 +652,7 @@
                 android:padding="@dimen/padding5"
                 android:textSize="@dimen/sub_title"
                 android:background="@drawable/full_rounded_corner_white"
-                android:inputType="text"
+                android:inputType="number"
                 android:imeOptions="actionNext"
                 android:maxLines="1"
                 android:ems="10"/>
@@ -688,8 +684,7 @@
                         android:id="@+id/rb_sesuai"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/txt_rb_bukti_gesek_ada"
-                        android:checked="true"/>
+                        android:text="@string/txt_rb_bukti_gesek_ada"/>
                     <RadioButton
                         android:id="@+id/rb_tidak"
                         android:layout_width="wrap_content"
@@ -842,7 +837,7 @@
                 android:textSize="@dimen/sub_title"
                 android:hint="@string/txt_nmr_telp"
                 android:background="@drawable/full_rounded_corner_white"
-                android:inputType="text"
+                android:inputType="number"
                 android:imeOptions="actionNext"
                 android:maxLines="1"
                 android:ems="10"/>
@@ -887,7 +882,7 @@
                 android:textSize="@dimen/sub_title"
                 android:hint="@string/txt_nmr_telp"
                 android:background="@drawable/full_rounded_corner_white"
-                android:inputType="text"
+                android:inputType="number"
                 android:imeOptions="actionNext"
                 android:maxLines="1"
                 android:ems="10"/>

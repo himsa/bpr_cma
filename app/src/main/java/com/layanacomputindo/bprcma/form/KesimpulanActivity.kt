@@ -4,9 +4,9 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.SharedPreferences
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
+import androidx.appcompat.widget.Toolbar
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -64,6 +64,7 @@ class KesimpulanActivity : AppCompatActivity(), View.OnClickListener {
         val call = service.sendKesimpulan(idKredit,
                 et_karakter.text.toString(),
                 et_kapasitas.text.toString(),
+                et_kondisi.text.toString(),
                 et_kapital.text.toString(),
                 et_jaminan.text.toString())
         call.enqueue(object : Callback<Result<UserId>> {

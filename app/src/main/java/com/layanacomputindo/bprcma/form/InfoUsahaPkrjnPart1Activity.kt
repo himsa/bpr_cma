@@ -6,9 +6,9 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.support.v7.app.AppCompatActivity
+import android.graphics.drawable.BitmapDrawable
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
 import android.util.Base64
 import android.util.Log
 import android.view.MenuItem
@@ -16,11 +16,12 @@ import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import com.layanacomputindo.bprcma.R
-import com.layanacomputindo.bprcma.model.Result
-import com.layanacomputindo.bprcma.model.UserId
+import com.layanacomputindo.bprcma.model.*
 import com.layanacomputindo.bprcma.rest.RestClient
 import com.layanacomputindo.bprcma.util.Config
+import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import im.delight.android.location.SimpleLocation
@@ -58,7 +59,10 @@ class InfoUsahaPkrjnPart1Activity : AppCompatActivity(), View.OnClickListener, R
         setPreferences()
 
         if(sharedPreferences.getString("from", "") == "repeat"){
-            setDummy()
+            pDialog = ProgressDialog.show(this,
+                    "",
+                    "Tunggu Sebentar!")
+            getData()
         }
 
         // construct a new instance of SimpleLocation
@@ -77,6 +81,142 @@ class InfoUsahaPkrjnPart1Activity : AppCompatActivity(), View.OnClickListener, R
         img_tempat2.setOnClickListener(this)
         img_dokumen.setOnClickListener(this)
         img_dokumen2.setOnClickListener(this)
+    }
+
+    private fun getFoto() {
+        val service by lazy {
+            RestClient.getClient(this)
+        }
+        val call = service.getFotoPekerjaan(idDebitur)
+        call.enqueue(object : Callback<Results<FotoPekerjaan>>{
+            override fun onFailure(call: Call<Results<FotoPekerjaan>>?, t: Throwable?) {
+                pDialog!!.dismiss()
+                Log.e("on Failure", t.toString())
+                Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<Results<FotoPekerjaan>>, response: Response<Results<FotoPekerjaan>>) {
+                Log.d("debitur", "Status Code = " + response.code())
+                if(response.isSuccessful){
+                    val result = response.body()
+                    if (result != null) {
+                        if (result.getStatus()!!) {
+                            val data = result.getData()
+                            pDialog!!.dismiss()
+                            if (data != null){
+                                if(data.lastIndex >=3){
+                                    Picasso.with(this@InfoUsahaPkrjnPart1Activity)
+                                            .load(data[0].getFoto())
+                                            .error(android.R.drawable.stat_notify_error).into(img_tempat)
+                                    Picasso.with(this@InfoUsahaPkrjnPart1Activity)
+                                            .load(data[1].getFoto())
+                                            .error(android.R.drawable.stat_notify_error).into(img_tempat2)
+                                    Picasso.with(this@InfoUsahaPkrjnPart1Activity)
+                                            .load(data[2].getFoto())
+                                            .error(android.R.drawable.stat_notify_error).into(img_dokumen)
+                                    Picasso.with(this@InfoUsahaPkrjnPart1Activity)
+                                            .load(data[3].getFoto())
+                                            .error(android.R.drawable.stat_notify_error).into(img_dokumen2)
+                                }else if(data.lastIndex ==2){
+                                    Picasso.with(this@InfoUsahaPkrjnPart1Activity)
+                                            .load(data[0].getFoto())
+                                            .error(android.R.drawable.stat_notify_error).into(img_tempat)
+                                    Picasso.with(this@InfoUsahaPkrjnPart1Activity)
+                                            .load(data[1].getFoto())
+                                            .error(android.R.drawable.stat_notify_error).into(img_tempat2)
+                                    Picasso.with(this@InfoUsahaPkrjnPart1Activity)
+                                            .load(data[2].getFoto())
+                                            .error(android.R.drawable.stat_notify_error).into(img_dokumen)
+                                    Picasso.with(this@InfoUsahaPkrjnPart1Activity)
+                                }else if(data.lastIndex ==1){
+                                    Picasso.with(this@InfoUsahaPkrjnPart1Activity)
+                                            .load(data[0].getFoto())
+                                            .error(android.R.drawable.stat_notify_error).into(img_tempat)
+                                    Picasso.with(this@InfoUsahaPkrjnPart1Activity)
+                                            .load(data[1].getFoto())
+                                            .error(android.R.drawable.stat_notify_error).into(img_tempat2)
+                                }else if(data.lastIndex == 0){
+                                    Picasso.with(this@InfoUsahaPkrjnPart1Activity)
+                                            .load(data[0].getFoto())
+                                            .error(android.R.drawable.stat_notify_error).into(img_tempat)
+                                }
+                            }
+
+                        } else {
+                            Log.e("debitur", response.raw().toString())
+                            Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+
+        })
+    }
+
+    private fun getData() {
+        val service by lazy {
+            RestClient.getClient(this)
+        }
+        val call = service.getPekerjaan(idDebitur)
+        call.enqueue(object: Callback<Result<Pekerjaan>>{
+            override fun onFailure(call: Call<Result<Pekerjaan>>?, t: Throwable?) {
+                pDialog!!.dismiss()
+                Log.e("on Failure", t.toString())
+                Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<Result<Pekerjaan>>, response: Response<Result<Pekerjaan>>) {
+                Log.d("debitur", "Status Code = " + response.code())
+                if(response.isSuccessful){
+                    val result = response.body()
+                    if (result != null) {
+                        if (result.getStatus()!!) {
+                            val data = result.getData()
+                            pDialog!!.dismiss()
+                            if (data != null){
+                                when(data.getJenisUtamaPekerjaan()){
+                                    "usaha" -> {
+                                        rb_usaha.isChecked = true
+                                    }
+                                    "karyawan" -> {
+                                        rb_karyawan.isChecked = true
+                                    }
+                                    else -> {
+                                        rb_pensiunan.isChecked = true
+                                    }
+                                }
+                                Picasso.with(this@InfoUsahaPkrjnPart1Activity)
+                                        .load(data.getFoto1())
+                                        .error(android.R.drawable.stat_notify_error).into(img_tempat)
+                                Picasso.with(this@InfoUsahaPkrjnPart1Activity)
+                                        .load(data.getFoto2())
+                                        .error(android.R.drawable.stat_notify_error).into(img_tempat2)
+                                Picasso.with(this@InfoUsahaPkrjnPart1Activity)
+                                        .load(data.getFotoPendukung1())
+                                        .error(android.R.drawable.stat_notify_error).into(img_dokumen)
+                                Picasso.with(this@InfoUsahaPkrjnPart1Activity)
+                                        .load(data.getFotoPendukung2())
+                                        .error(android.R.drawable.stat_notify_error).into(img_dokumen2)
+                                if(data.getLatitude().isNullOrEmpty() && data.getLongitude().isNullOrEmpty()){
+
+                                }else{
+                                    lat = data.getLatitude()!!.toDouble()
+                                    long = data.getLongitude()!!.toDouble()
+                                    tv_location.text = resources.getText(R.string.lokasi_disimpan)
+                                    pick_location.isClickable = false
+                                    pick_location.setImageResource(R.drawable.icon_lokasi_grey)
+                                }
+                            }
+
+                        } else {
+                            Log.e("debitur", response.raw().toString())
+                            Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+
+        })
     }
 
     private fun setDummy() {
@@ -119,10 +259,7 @@ class InfoUsahaPkrjnPart1Activity : AppCompatActivity(), View.OnClickListener, R
     override fun onClick(p0: View) {
         when(p0.id){
             R.id.btn_next_inf_ush_pkrj_1 -> {
-                pDialog = ProgressDialog.show(this,
-                        "",
-                        "Tunggu Sebentar!")
-                submitData()
+                next()
             }
             R.id.img_tempat -> {
                 flagPhoto = 0
@@ -149,11 +286,34 @@ class InfoUsahaPkrjnPart1Activity : AppCompatActivity(), View.OnClickListener, R
         }
     }
 
+    private fun next() {
+        if(sharedPreferences.getString("from", "") == "repeat"){
+            if(img_tempat.drawable != null && img_tempat2.drawable != null && img_dokumen.drawable != null && img_dokumen2.drawable != null){
+                strImage1 = getStringImage((img_tempat.getDrawable() as BitmapDrawable).bitmap)
+                strImage2 = getStringImage((img_tempat2.getDrawable() as BitmapDrawable).bitmap)
+                strImage3 = getStringImage((img_dokumen.getDrawable() as BitmapDrawable).bitmap)
+                strImage4 = getStringImage((img_dokumen2.getDrawable() as BitmapDrawable).bitmap)
+            }
+        }
+
+        pDialog = ProgressDialog.show(this,
+                "",
+                "Tunggu Sebentar!")
+
+        if(uploadJenis != "" && strImage1 != "" && strImage2 != "" && strImage3 != "" && strImage4 != "" && lat.toString() != "" &&
+                long.toString() != ""){
+            submitData()
+        }else{
+            pDialog!!.dismiss()
+            Toast.makeText(applicationContext, R.string.cekData, Toast.LENGTH_LONG).show()
+        }
+    }
+
     private fun submitData() {
         val service by lazy {
             RestClient.getClient(this)
         }
-        val call = service.sendPekerjaanDebitur(idDebitur, lat.toString(), long.toString(), uploadJenis)
+        val call = service.sendPekerjaanDebitur(idDebitur, lat.toString(), long.toString(), uploadJenis, strImage1, strImage2, strImage3, strImage4)
         call.enqueue(object : Callback<Result<UserId>>{
             override fun onFailure(call: Call<Result<UserId>>?, t: Throwable?) {
                 pDialog!!.dismiss()
@@ -167,41 +327,17 @@ class InfoUsahaPkrjnPart1Activity : AppCompatActivity(), View.OnClickListener, R
                     val result = response.body()
                     if (result != null) {
                         if (result.getStatus()!!) {
-                            sendFotoPekerjaan()
-                        } else {
-                            Log.e("debitur", response.raw().toString())
-                            Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
-            }
-
-        })
-    }
-
-    private fun sendFotoPekerjaan() {
-        val service by lazy {
-            RestClient.getClient(this)
-        }
-        val call = service.sendFotoPekerjaanDebitur(idDebitur, strImage1, strImage2, strImage3, strImage4)
-        call.enqueue(object : Callback<Result<UserId>>{
-            override fun onFailure(call: Call<Result<UserId>>?, t: Throwable?) {
-                pDialog!!.dismiss()
-                Log.e("on Failure", t.toString())
-                Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_LONG).show()
-            }
-
-            override fun onResponse(call: Call<Result<UserId>>, response: Response<Result<UserId>>) {
-                Log.d("tmp tggl", "Status Code = " + response.code())
-                if(response.isSuccessful){
-                    val result = response.body()
-                    if (result != null) {
-                        if (result.getStatus()!!) {
+                            pDialog!!.dismiss()
                             startActivity(Intent(this@InfoUsahaPkrjnPart1Activity, PermohonanKreditActivity::class.java))
                         } else {
-                            Log.e("debitur", response.raw().toString())
+                            pDialog!!.dismiss()
+                            Log.e("tmp tggl", response.raw().toString())
                             Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
                         }
+                    }else{
+                        pDialog!!.dismiss()
+                        Log.e("tmp tggl", response.raw().toString())
+                        Toast.makeText(baseContext, response.message(), Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -244,7 +380,7 @@ class InfoUsahaPkrjnPart1Activity : AppCompatActivity(), View.OnClickListener, R
 
     fun getStringImage(bmp: Bitmap): String {
         val baos = ByteArrayOutputStream()
-        bmp.compress(Bitmap.CompressFormat.JPEG, 50, baos)
+        bmp.compress(Bitmap.CompressFormat.JPEG, 30, baos)
         val imageBytes = baos.toByteArray()
         return Base64.encodeToString(imageBytes, Base64.DEFAULT)
     }

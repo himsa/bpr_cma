@@ -27,6 +27,18 @@ class Pekerjaan {
     @SerializedName("updated_at")
     @Expose
     private var updatedAt: String? = null
+    @SerializedName("foto_1")
+    @Expose
+    private var foto1: String? = null
+    @SerializedName("foto_2")
+    @Expose
+    private var foto2: String? = null
+    @SerializedName("foto_pendukung_1")
+    @Expose
+    private var fotoPendukung1: String? = null
+    @SerializedName("foto_pendukung_2")
+    @Expose
+    private var fotoPendukung2: String? = null
 
     fun getId(): Int? {
         return id
@@ -83,4 +95,37 @@ class Pekerjaan {
     fun setUpdatedAt(updatedAt: String) {
         this.updatedAt = updatedAt
     }
+
+    fun getFoto1(): String? {
+        return foto1
+    }
+
+    fun setFoto1(foto1: String) {
+        this.foto1 = foto1
+    }
+
+    fun getFoto2(): String? {
+        return foto2
+    }
+
+    fun setFoto2(foto2: String) {
+        this.foto2 = foto2
+    }
+
+    fun getFotoPendukung1(): String? {
+        return fotoPendukung1
+    }
+
+    fun setFotoPendukung1(fotoPendukung1: String) {
+        this.fotoPendukung1 = fotoPendukung1
+    }
+
+    fun getFotoPendukung2(): String? {
+        return fotoPendukung2
+    }
+
+    fun setFotoPendukung2(fotoPendukung2: String) {
+        this.fotoPendukung2 = fotoPendukung2
+    }
+
 }

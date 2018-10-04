@@ -4,9 +4,9 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.SharedPreferences
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
+import androidx.appcompat.widget.Toolbar
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -54,7 +54,7 @@ class PrfLabaRugiActivity : AppCompatActivity(), View.OnClickListener, View.OnFo
         setPreferences()
 
         if(sharedPreferences.getString("from", "") == "repeat"){
-            setDummy()
+
         }
 
         et_omz.addTextChangedListener(RupiahTextWatcher(et_omz))
@@ -226,11 +226,31 @@ class PrfLabaRugiActivity : AppCompatActivity(), View.OnClickListener, View.OnFo
     override fun onClick(p0: View) {
         when(p0.id){
             R.id.btn_next_prf_laba_rugi -> {
-                pDialog = ProgressDialog.show(this,
-                        "",
-                        "Tunggu Sebentar!")
-                submitData()
+                next()
             }
+        }
+    }
+
+    private fun next() {
+        pDialog = ProgressDialog.show(this,
+                "",
+                "Tunggu Sebentar!")
+        if(et_omz.text.toString() != "" && et_detail_keterangan.text.toString() != "" &&
+                et_hpp.text.toString() != "" && etGajiKyw.toString() != "" &&
+                etSwTmpUsaha.toString() != "" && etLstrkAirTelp.toString() != "" && etAdmKemLing.toString() != "" &&
+                etLainLain.toString() != "" && sumBiaya.toString() != "" && et_detail_keterangan2.text.toString() != "" &&
+                et_keuntungan_usaha.text.toString() != "" && et_grs_prft_mrgn.text.toString() != "" && et_pndptn_suami_istri.text.toString() != "" &&
+                et_pndptn_lain.text.toString() != "" && et_detail_keterangan3.text.toString() != "" && et_netto.text.toString() != "" &&
+                et_detail_keterangan4.text.toString() != "" && etBiayaRt.toString() != "" && etLstrkAirTelp2.toString() != "" &&
+                etBPend.toString() != "" && etBSewaLain.toString() != "" && sumBiaya2.toString() != "" &&
+                et_detail_keterangan6.text.toString() != "" && et_sisa_pnghsln_net.text.toString() != "" &&
+                et_detail_keterangan7.text.toString() != "" && et_angs_bnk_lain.toString() != "" &&
+                et_rnc_angs.text.toString() != "" && et_total_angs.text.toString() != "" &&
+                et_detail_keterangan8.text.toString() != ""){
+            submitData()
+        }else{
+            pDialog!!.dismiss()
+            Toast.makeText(applicationContext, R.string.cekData, Toast.LENGTH_LONG).show()
         }
     }
 
@@ -280,12 +300,18 @@ class PrfLabaRugiActivity : AppCompatActivity(), View.OnClickListener, View.OnFo
                     val result = response.body()
                     if (result != null) {
                         if (result.getStatus()!!) {
+                            pDialog!!.dismiss()
                             startActivity(Intent(this@PrfLabaRugiActivity, KesimpulanActivity::class.java))
                         } else {
+                            pDialog!!.dismiss()
                             Log.e("debitur", response.raw().toString())
                             Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
                         }
                     }
+                }else{
+                    pDialog!!.dismiss()
+                    Log.e("debitur", response.raw().toString())
+                    Toast.makeText(baseContext, response.message(), Toast.LENGTH_SHORT).show()
                 }
             }
 

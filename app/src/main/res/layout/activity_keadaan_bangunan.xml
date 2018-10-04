@@ -113,8 +113,7 @@
                         android:id="@+id/rb_prmn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/txt_rb_rb_prmn"
-                        android:checked="true"/>
+                        android:text="@string/txt_rb_rb_prmn"/>
                     <RadioButton
                         android:id="@+id/rb_sm_prmn"
                         android:layout_width="wrap_content"
@@ -138,8 +137,7 @@
                         android:id="@+id/rb_btn_trtlng"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/txt_rb_btn_trtlng"
-                        android:checked="true"/>
+                        android:text="@string/txt_rb_btn_trtlng"/>
                     <RadioButton
                         android:id="@+id/rb_bs_bj"
                         android:layout_width="wrap_content"

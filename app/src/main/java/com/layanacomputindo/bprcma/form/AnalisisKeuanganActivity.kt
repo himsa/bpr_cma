@@ -4,9 +4,8 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.SharedPreferences
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -16,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_analisis_keuangan.*
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import com.layanacomputindo.bprcma.model.Result
 import com.layanacomputindo.bprcma.model.UserId
 import com.layanacomputindo.bprcma.rest.RestClient
@@ -214,76 +214,16 @@ class AnalisisKeuanganActivity : AppCompatActivity(), View.OnClickListener, View
                 pDialog = ProgressDialog.show(this,
                         "",
                         "Tunggu Sebentar!")
-                submitData()
+                submitTotalAktiva()
             }
         }
-    }
-
-    private fun submitData() {
-        val service by lazy {
-            RestClient.getClient(this)
-        }
-        val call = service.sendAktivaLancar(idKredit, etKas, etBank, etPiutang, etPersediaan, subTotal)
-        call.enqueue(object : Callback<Result<UserId>>{
-            override fun onFailure(call: Call<Result<UserId>>?, t: Throwable?) {
-                pDialog!!.dismiss()
-                Log.e("on Failure", t.toString())
-                Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_LONG).show()
-            }
-
-            override fun onResponse(call: Call<Result<UserId>>, response: Response<Result<UserId>>) {
-                Log.d("tmp tggl", "Status Code = " + response.code())
-                if(response.isSuccessful){
-                    val result = response.body()
-                    if (result != null) {
-                        if (result.getStatus()!!) {
-                            submitAktivaTetap()
-                        } else {
-                            Log.e("debitur", response.raw().toString())
-                            Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
-            }
-
-        })
-    }
-
-    private fun submitAktivaTetap() {
-        val service by lazy {
-            RestClient.getClient(this)
-        }
-        val call = service.sendAktivaTetap(idKredit, etTanah, etBangunan, etKendaraan, etInvLain, etAkuDepre, subTotal2)
-        call.enqueue(object : Callback<Result<UserId>>{
-            override fun onFailure(call: Call<Result<UserId>>?, t: Throwable?) {
-                pDialog!!.dismiss()
-                Log.e("on Failure", t.toString())
-                Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_LONG).show()
-            }
-
-            override fun onResponse(call: Call<Result<UserId>>, response: Response<Result<UserId>>) {
-                Log.d("tmp tggl", "Status Code = " + response.code())
-                if(response.isSuccessful){
-                    val result = response.body()
-                    if (result != null) {
-                        if (result.getStatus()!!) {
-                            submitTotalAktiva()
-                        } else {
-                            Log.e("debitur", response.raw().toString())
-                            Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
-            }
-
-        })
     }
 
     private fun submitTotalAktiva() {
         val service by lazy {
             RestClient.getClient(this)
         }
-        val call = service.sendKeuanganAktivaDebitur(idKredit, et_periode.text.toString() , total)
+        val call = service.sendKeuanganAktivaDebitur(idKredit, et_periode.text.toString() , etKas, etBank, etPiutang, etPersediaan,etTanah, etBangunan, etKendaraan, etInvLain, etAkuDepre)
         call.enqueue(object : Callback<Result<UserId>>{
             override fun onFailure(call: Call<Result<UserId>>?, t: Throwable?) {
                 pDialog!!.dismiss()

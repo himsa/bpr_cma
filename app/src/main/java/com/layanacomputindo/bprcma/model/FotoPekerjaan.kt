@@ -9,18 +9,12 @@ class FotoPekerjaan {
     @SerializedName("id")
     @Expose
     private var id: Int? = null
-    @SerializedName("debitur_id")
+    @SerializedName("pekerjaan_usaha_id")
     @Expose
-    private var debiturId: Int? = null
-    @SerializedName("latitude")
+    private var pekerjaanUsahaId: Int? = null
+    @SerializedName("foto")
     @Expose
-    private var latitude: String? = null
-    @SerializedName("longitude")
-    @Expose
-    private var longitude: String? = null
-    @SerializedName("jenis_utama_pekerjaan")
-    @Expose
-    private var jenisUtamaPekerjaan: String? = null
+    private var foto: String? = null
     @SerializedName("created_at")
     @Expose
     private var createdAt: String? = null
@@ -36,36 +30,20 @@ class FotoPekerjaan {
         this.id = id
     }
 
-    fun getDebiturId(): Int? {
-        return debiturId
+    fun getPekerjaanUsahaId(): Int? {
+        return pekerjaanUsahaId
     }
 
-    fun setDebiturId(debiturId: Int?) {
-        this.debiturId = debiturId
+    fun setPekerjaanUsahaId(pekerjaanUsahaId: Int?) {
+        this.pekerjaanUsahaId = pekerjaanUsahaId
     }
 
-    fun getLatitude(): String? {
-        return latitude
+    fun getFoto(): String? {
+        return foto
     }
 
-    fun setLatitude(latitude: String) {
-        this.latitude = latitude
-    }
-
-    fun getLongitude(): String? {
-        return longitude
-    }
-
-    fun setLongitude(longitude: String) {
-        this.longitude = longitude
-    }
-
-    fun getJenisUtamaPekerjaan(): String? {
-        return jenisUtamaPekerjaan
-    }
-
-    fun setJenisUtamaPekerjaan(jenisUtamaPekerjaan: String) {
-        this.jenisUtamaPekerjaan = jenisUtamaPekerjaan
+    fun setFoto(foto: String) {
+        this.foto = foto
     }
 
     fun getCreatedAt(): String? {

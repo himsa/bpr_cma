@@ -4,9 +4,9 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.SharedPreferences
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
+import androidx.appcompat.widget.Toolbar
 import android.text.InputType
 import android.util.Log
 import android.view.MenuItem
@@ -17,6 +17,7 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
 import com.layanacomputindo.bprcma.R
+import com.layanacomputindo.bprcma.model.Kredit
 import com.layanacomputindo.bprcma.model.Result
 import com.layanacomputindo.bprcma.model.Results
 import com.layanacomputindo.bprcma.model.UserId
@@ -34,6 +35,7 @@ class PermohonanKreditActivity : AppCompatActivity(), RadioGroup.OnCheckedChange
     private var pDialog: ProgressDialog? = null
 
     var idDebitur = 0
+    var idKredit = 0
     var uploadJenisKredit = ""
     var uploadTujuanKredit = ""
     var uploadSektorEkonomi = ""
@@ -50,7 +52,10 @@ class PermohonanKreditActivity : AppCompatActivity(), RadioGroup.OnCheckedChange
         setPreferences()
 
         if(sharedPreferences.getString("from", "") == "repeat"){
-            setDummy()
+            pDialog = ProgressDialog.show(this,
+                    "",
+                    "Tunggu Sebentar!")
+            getData()
         }
 
         et_nominal.addTextChangedListener(RupiahTextWatcher(et_nominal))
@@ -65,11 +70,46 @@ class PermohonanKreditActivity : AppCompatActivity(), RadioGroup.OnCheckedChange
         sp_pilih_tujuan_kredit.setAdapter(tjKreditAdapter, 0)
         sp_sektor_ekonomi.setAdapter(sktEkonomiAdapter, 0)
 
-        sp_pilih_tujuan_kredit.setOnSpinnerItemClickListener({ position, itemAtPosition ->
+        sp_pilih_tujuan_kredit.setOnSpinnerItemClickListener { position, itemAtPosition ->
             uploadTujuanKredit = itemAtPosition
-        })
-        sp_sektor_ekonomi.setOnSpinnerItemClickListener({ position, itemAtPosition ->
+        }
+        sp_sektor_ekonomi.setOnSpinnerItemClickListener { position, itemAtPosition ->
             uploadSektorEkonomi = itemAtPosition
+        }
+    }
+
+    private fun getData() {
+        val service by lazy {
+            RestClient.getClient(this)
+        }
+        val call = service.getPermohonanKredit(idKredit)
+        call.enqueue(object: Callback<Result<Kredit>>{
+            override fun onFailure(call: Call<Result<Kredit>>?, t: Throwable?) {
+                pDialog!!.dismiss()
+                Log.e("on Failure", t.toString())
+                Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(call: Call<Result<Kredit>>, response: Response<Result<Kredit>>) {
+                Log.d("kredit", "Status Code = " + response.code())
+                if(response.isSuccessful){
+                    val result = response.body()
+                    if (result != null) {
+                        if (result.getStatus()!!) {
+                            val data = result.getData()
+                            pDialog!!.dismiss()
+                            if (data != null){
+                                et_nominal.setText(data.getNominal().toString())
+                            }
+
+                        } else {
+                            Log.e("kredit", response.raw().toString())
+                            Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+
         })
     }
 
@@ -85,6 +125,7 @@ class PermohonanKreditActivity : AppCompatActivity(), RadioGroup.OnCheckedChange
         sharedPreferences = getSharedPreferences(Config.PREF_NAME,
                 Activity.MODE_PRIVATE)
         idDebitur = sharedPreferences.getInt(Config.DEBITUR_ID, Config.EMPTY_INT)
+        idKredit = sharedPreferences.getInt(Config.KREDIT_ID, Config.EMPTY_INT)
     }
 
     override fun onCheckedChanged(p0: RadioGroup?, p1: Int) {

@@ -8,16 +8,16 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <android.support.v4.widget.SwipeRefreshLayout
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/srlRefresh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_kendaraan"
                 android:padding="@dimen/padding5"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
-        </android.support.v4.widget.SwipeRefreshLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         <ProgressBar
             android:id="@+id/pbLoading"
             android:layout_width="50dp"

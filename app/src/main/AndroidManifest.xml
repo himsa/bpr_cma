@@ -10,7 +10,8 @@
     <uses-feature android:name="android.hardware.camera" />
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
@@ -23,7 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -69,133 +70,133 @@
             android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.InfoNasabahPart1Activity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.InfoNasabahPart2Activity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.InfoNasabahPart3Activity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.InfoUsahaPkrjnPart1Activity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.PermohonanKreditActivity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.AnalisisUsahaPart1Activity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.AnalisisUsahaPart2Activity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.SumberPengembalianKreditActivity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.AnalisisKeuanganActivity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.AnalisisKeuangan2Activity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.PrfLabaRugiActivity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.AnalisisRatioActivity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.WorkingInvestmentActivity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.AnalisisKemMemAngActivity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.TambahanInformasiActivity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.KesimpulanActivity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.UsulanKreditActivity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.PemeriksaanJaminanActivity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.TabunganDepositoActivity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.KendaraanActivity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.FotoKondisiKendaraanActivity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.TanahBangunanActivity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.KeadaanTanahActivity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.AksesJalanActivity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.KeadaanBangunanActivity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.TataRuangActivity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.FasilitasUmumActivity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.FotoKondisiTanahActivity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.FaktorPenilaianActivity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.SumberHargaTanahActivity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity
             android:name=".form.PenilaianKesimpulanActivity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
         <activity android:name=".util.PickImageHiddenActivity" />
         <activity
             android:name=".SpalshActivity"
-            android:theme="@style/LoginTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize">
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/LoginTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -204,12 +205,12 @@
         </activity>
         <activity
             android:name=".util.CameraActivity"
-            android:theme="@style/LoginTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/LoginTheme" />
         <activity
             android:name=".ListKreditActivity"
-            android:theme="@style/InformasiNasabahTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiNasabahTheme" />
 
         <service android:name=".MyFirebaseInstanceIDService">
             <intent-filter>
@@ -224,12 +225,16 @@
 
         <activity
             android:name=".AprovalListActivity"
-            android:theme="@style/InformasiKreditTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiKreditTheme" />
         <activity
             android:name=".ListJaminanActivity"
-            android:theme="@style/InformasiKreditTheme"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiKreditTheme" />
+        <activity
+            android:name=".form.FotoKendaraan2Activity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/InformasiKreditTheme" />
     </application>
 
 </manifest>

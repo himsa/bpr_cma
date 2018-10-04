@@ -381,8 +381,7 @@
                         android:id="@+id/cb_pdam"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/txt_PDAM"
-                        android:checked="true"/>
+                        android:text="@string/txt_PDAM"/>
                     <CheckBox
                         android:id="@+id/cb_pmp_lstrk"
                         android:layout_width="wrap_content"

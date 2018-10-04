@@ -209,8 +209,7 @@
                         android:id="@+id/rb_sejajar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/txt_rb_sejajar"
-                        android:checked="true"/>
+                        android:text="@string/txt_rb_sejajar"/>
                     <RadioButton
                         android:id="@+id/rb_tinggi"
                         android:layout_width="wrap_content"
@@ -239,8 +238,7 @@
                         android:id="@+id/rb_rmh_tinggal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/txt_rb_rmh_tinggal"
-                        android:checked="true"/>
+                        android:text="@string/txt_rb_rmh_tinggal"/>
                     <RadioButton
                         android:id="@+id/rb_rmh_toko"
                         android:layout_width="wrap_content"
@@ -269,8 +267,7 @@
                         android:id="@+id/rb_pkrngn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/txt_rb_rb_pkrngn"
-                        android:checked="true"/>
+                        android:text="@string/txt_rb_rb_pkrngn"/>
                     <RadioButton
                         android:id="@+id/rb_tegalan"
                         android:layout_width="wrap_content"

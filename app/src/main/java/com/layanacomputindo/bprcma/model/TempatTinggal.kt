@@ -27,6 +27,15 @@ class TempatTinggal {
     @SerializedName("updated_at")
     @Expose
     private var updatedAt: String? = null
+    @SerializedName("foto_dokumen")
+    @Expose
+    private var fotoDokumen: String? = null
+    @SerializedName("foto_1")
+    @Expose
+    private var foto1: String? = null
+    @SerializedName("foto_2")
+    @Expose
+    private var foto2: String? = null
 
     fun getId(): Int? {
         return id
@@ -83,4 +92,29 @@ class TempatTinggal {
     fun setUpdatedAt(updatedAt: String) {
         this.updatedAt = updatedAt
     }
+
+    fun getFotoDokumen(): String? {
+        return fotoDokumen
+    }
+
+    fun setFotoDokumen(fotoDokumen: String) {
+        this.fotoDokumen = fotoDokumen
+    }
+
+    fun getFoto1(): String? {
+        return foto1
+    }
+
+    fun setFoto1(foto1: String) {
+        this.foto1 = foto1
+    }
+
+    fun getFoto2(): String? {
+        return foto2
+    }
+
+    fun setFoto2(foto2: String) {
+        this.foto2 = foto2
+    }
+
 }

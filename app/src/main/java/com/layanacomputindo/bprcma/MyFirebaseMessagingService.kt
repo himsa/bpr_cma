@@ -7,13 +7,10 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.media.RingtoneManager
-import android.os.Bundle
-import android.support.v4.app.NotificationCompat
+import androidx.core.app.NotificationCompat
 import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import java.text.NumberFormat
-import java.util.*
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 

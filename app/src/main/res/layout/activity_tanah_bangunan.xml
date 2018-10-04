@@ -49,8 +49,7 @@
                         android:id="@+id/rb_shm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/txt_rb_shm"
-                        android:checked="true"/>
+                        android:text="@string/txt_rb_shm"/>
                     <RadioButton
                         android:id="@+id/rb_shgm"
                         android:layout_width="wrap_content"

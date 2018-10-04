@@ -4,14 +4,14 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.SharedPreferences
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_menu.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -75,7 +75,7 @@ class MenuActivity : AppCompatActivity(), View.OnClickListener {
                 val i = Intent(this,InformasiKreditActivity::class.java)
                 val editor = sharedPreferences.edit()
                 editor.putString("from", "repeat")
-                editor.putString("status", "cancel")
+                editor.putString("status", "proses")
                 editor.apply()
                 startActivity(i)
             }

@@ -4,13 +4,13 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.SharedPreferences
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import com.layanacomputindo.bprcma.R
 import com.layanacomputindo.bprcma.model.Result
 import com.layanacomputindo.bprcma.model.UserId
@@ -199,76 +199,16 @@ class AnalisisKeuangan2Activity : AppCompatActivity(), View.OnClickListener, Vie
                 pDialog = ProgressDialog.show(this,
                         "",
                         "Tunggu Sebentar!")
-                submitData()
+                submitTotalPasiva()
             }
         }
-    }
-
-    private fun submitData() {
-        val service by lazy {
-            RestClient.getClient(this)
-        }
-        val call = service.sendPasivaHutang(idKredit, etHtgBank, etHtgDagang, etHtgJkPj, etKwMsh, subTotal)
-        call.enqueue(object : Callback<Result<UserId>> {
-            override fun onFailure(call: Call<Result<UserId>>?, t: Throwable?) {
-                pDialog!!.dismiss()
-                Log.e("on Failure", t.toString())
-                Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_LONG).show()
-            }
-
-            override fun onResponse(call: Call<Result<UserId>>, response: Response<Result<UserId>>) {
-                Log.d("tmp tggl", "Status Code = " + response.code())
-                if(response.isSuccessful){
-                    val result = response.body()
-                    if (result != null) {
-                        if (result.getStatus()!!) {
-                            submitPasivaModal()
-                        } else {
-                            Log.e("debitur", response.raw().toString())
-                            Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
-            }
-
-        })
-    }
-
-    private fun submitPasivaModal() {
-        val service by lazy {
-            RestClient.getClient(this)
-        }
-        val call = service.sendPasivaModal(idKredit, etModal1, etMdlKrj, etCdLbDthn, etLbThBjln, subTotal2)
-        call.enqueue(object : Callback<Result<UserId>>{
-            override fun onFailure(call: Call<Result<UserId>>?, t: Throwable?) {
-                pDialog!!.dismiss()
-                Log.e("on Failure", t.toString())
-                Toast.makeText(applicationContext, R.string.cekkoneksi, Toast.LENGTH_LONG).show()
-            }
-
-            override fun onResponse(call: Call<Result<UserId>>, response: Response<Result<UserId>>) {
-                Log.d("tmp tggl", "Status Code = " + response.code())
-                if(response.isSuccessful){
-                    val result = response.body()
-                    if (result != null) {
-                        if (result.getStatus()!!) {
-                            submitTotalPasiva()
-                        } else {
-                            Log.e("debitur", response.raw().toString())
-                            Toast.makeText(baseContext, result.getMessage(), Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
-            }
-
-        })
     }
 
     private fun submitTotalPasiva() {
         val service by lazy {
             RestClient.getClient(this)
         }
-        val call = service.sendKeuanganPasivaDebitur(idKredit, total)
+        val call = service.sendKeuanganPasivaDebitur(idKredit, etHtgBank, etHtgDagang, etHtgJkPj, etKwMsh,etModal1, etMdlKrj, etCdLbDthn, etLbThBjln)
         call.enqueue(object : Callback<Result<UserId>>{
             override fun onFailure(call: Call<Result<UserId>>?, t: Throwable?) {
                 pDialog!!.dismiss()
